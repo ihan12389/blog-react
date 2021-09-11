@@ -1,8 +1,9 @@
+import React from "react";
 import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
     /*기본태그 정의*/
-    html, body {height:100%; padding:0; margin:0;}
+    html, body, #root {height:100%; padding:0; margin:0;}
     body, td, select, textarea, input {font-size:12px/140%; font-family:'돋움','Dotum', 'verdana'; color:#666;}
 
     /* 마진과 패딩의 초기화 */
