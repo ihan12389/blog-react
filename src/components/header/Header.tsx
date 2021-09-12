@@ -22,7 +22,7 @@ const HeaderCarousel = styled(Carousel)`
   .carousel-inner > .carousel-item > img {
     width: 100%;
     height: 100%;
-    opacity: 0.7;
+    opacity: 0.9;
   }
   .sr-only {
     display: none;
@@ -52,7 +52,7 @@ const AuthContainer = styled(Container)`
 `;
 
 const AuthButton = styled(Button)`
-  opacity: 0.5;
+  opacity: 0.6;
 
   @media (min-width: 1200px) {
     width: 130px;
@@ -68,7 +68,7 @@ const LabelContainer = styled(Container)`
     color: white;
     font-size: 60px;
     font-family: "Righteous", cursive;
-    text-shadow: 4px 2px 2px #999999;
+    text-shadow: 4px 2px 2px rgba(0, 0, 0, 0.2);
     word-spacing: 3px;
     letter-spacing: 3px;
   }
@@ -91,13 +91,13 @@ const Header = () => {
     <HeaderContainer>
       <HeaderCarousel>
         <Carousel.Item>
-          <Image fluid src="./images/1.jpg" />
-        </Carousel.Item>
-        <Carousel.Item>
           <Image fluid src="./images/2.jpg" />
         </Carousel.Item>
         <Carousel.Item>
-          <Image fluid src="./images/3.jpg" />
+          <Image fluid src="./images/8.jpg" />
+        </Carousel.Item>
+        <Carousel.Item>
+          <Image fluid src="./images/9.jpg" />
         </Carousel.Item>
       </HeaderCarousel>
       <LabelContainer>

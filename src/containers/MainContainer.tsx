@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import { Container, Row } from "react-bootstrap";
 import Header from "../components/header/Header";
+import HeaderSearch from "../components/search/HeaderSearch";
+import Main from "../components/main/Main";
 
 const TopContainer = styled(Container)`
   height: 100%;
@@ -29,6 +31,8 @@ const FirstRow = styled(Row)`
 const SecondRow = styled(Row)`
   width: 100%;
   height: 400px;
+  margin: 0;
+  padding: 0;
 `;
 
 const MainContainer = () => {
@@ -37,7 +41,10 @@ const MainContainer = () => {
       <FirstRow>
         <Header />
       </FirstRow>
-      <SecondRow></SecondRow>
+      <HeaderSearch />
+      <SecondRow>
+        <Main />
+      </SecondRow>
     </TopContainer>
   );
 };
