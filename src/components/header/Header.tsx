@@ -34,9 +34,12 @@ const AuthContainer = styled(Container)`
   justify-content: center;
   position: absolute;
   gap: 60px;
-  top: 275px;
+  top: 350px;
   margin: 0;
   padding: 0;
+  @media (max-width: 760px) {
+    gap: 30px;
+  }
   @media (min-width: 760px) {
     width: 760px;
     gap: 150px;
@@ -52,9 +55,13 @@ const AuthContainer = styled(Container)`
 `;
 
 const AuthButton = styled(Button)`
-  opacity: 0.6;
-
-  @media (min-width: 1200px) {
+  opacity: 0.7;
+  @media (max-width: 760px) {
+    gap: 30px;
+    width: 120px;
+    height: 60px;
+  }
+  @media (min-width: 760px) {
     width: 130px;
     height: 60px;
   }
@@ -62,7 +69,7 @@ const AuthButton = styled(Button)`
 
 const LabelContainer = styled(Container)`
   position: absolute;
-  top: 100px;
+  top: 150px;
   text-align: center;
   span {
     color: white;
@@ -104,10 +111,10 @@ const Header = () => {
         <span>LiHano's Blog</span>
       </LabelContainer>
       <AuthContainer>
-        <AuthButton variant="success" size="lg">
+        <AuthButton variant="dark" size="lg">
           Log In
         </AuthButton>
-        <AuthButton variant="success" size="lg">
+        <AuthButton variant="dark" size="lg">
           Sign Up
         </AuthButton>
       </AuthContainer>

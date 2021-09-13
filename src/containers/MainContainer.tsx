@@ -7,8 +7,6 @@ import Main from "../components/main/Main";
 
 const TopContainer = styled(Container)`
   height: 100%;
-  min-height: 600px;
-  /* margin: 0; */
   padding: 0;
   @media (min-width: 760px) {
     width: 760px;
@@ -23,7 +21,7 @@ const TopContainer = styled(Container)`
 
 const FirstRow = styled(Row)`
   width: 100%;
-  height: 500px;
+  height: 600px;
   margin: 0;
   padding: 0;
 `;

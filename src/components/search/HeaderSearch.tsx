@@ -12,7 +12,7 @@ const SearchContainer = styled(Container)`
   width: 200px;
   position: absolute;
   height: 60px;
-  top: 470px;
+  top: 570px;
   margin: 0 auto;
   left: 0;
   right: 0;
