@@ -1,282 +1,224 @@
 import React from "react";
 import styled from "styled-components";
-import { Container, Row, Image, Pagination } from "react-bootstrap";
-import "../../style/fonts.css";
+import { Container, Row, Button } from "react-bootstrap";
+import { ImArrowLeft, ImArrowRight } from "react-icons/im";
+import { IoReturnDownBackSharp } from "react-icons/io5";
 
-const ContentContainer = styled(Container)`
+const ShowContainer = styled(Container)`
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
+
+const HandleBarRow = styled(Row)`
   width: 100%;
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  margin-top: 100px;
-`;
-
-const LeftItemRow = styled(Row)`
-  padding: 0;
-  margin: 0;
-  display: flex;
-  align-items: center;
+  h2 {
+    text-align: center;
+  }
+  svg {
+    width: auto;
+    font-size: 24px;
+    cursor: pointer;
+    color: #444444;
+  }
   @media (max-width: 760px) {
-    height: 120px;
-    width: 470px;
+    h2 {
+      font-size: 18px;
+    }
   }
   @media (min-width: 760px) {
-    height: 140px;
-    width: 700px;
+    h2 {
+      font-size: 22px;
+    }
   }
   @media (min-width: 992px) {
-    height: 150px;
-    width: 900px;
+    h2 {
+      font-size: 28px;
+    }
   }
   @media (min-width: 1200px) {
-    height: 150px;
-    width: 1000px;
+    h2 {
+      font-size: 32px;
+    }
   }
 `;
 
-const PreviewImage = styled(Image)`
-  margin: 0;
-  padding: 0;
+const PostInformRow = styled(Row)`
+  width: 100%;
+  margin-top: 30px;
+  height: 30px;
+  span {
+    height: 100%;
+    text-align: center;
+  }
   @media (max-width: 760px) {
-    width: 130px;
-    height: 120px;
+    .postNum {
+      width: 50px;
+      border: 1px solid black;
+    }
+    .writer {
+      width: 100px;
+      border-top: 1px solid black;
+      border-bottom: 1px solid black;
+      border-right: 1px solid black;
+    }
+    .title {
+      flex: 1;
+      border-top: 1px solid black;
+      border-bottom: 1px solid black;
+      border-right: 1px solid black;
+    }
+    .likes {
+      width: 50px;
+      border-top: 1px solid black;
+      border-bottom: 1px solid black;
+      border-right: 1px solid black;
+    }
+    .time {
+      display: none;
+      width: 150px;
+      border-top: 1px solid black;
+      border-bottom: 1px solid black;
+      border-right: 1px solid black;
+    }
   }
   @media (min-width: 760px) {
-    width: 160px;
-    height: 140px;
+    .postNum {
+      width: 50px;
+      border: 1px solid black;
+    }
+    .writer {
+      width: 120px;
+      border-top: 1px solid black;
+      border-bottom: 1px solid black;
+      border-right: 1px solid black;
+    }
+    .title {
+      flex: 1;
+      border-top: 1px solid black;
+      border-bottom: 1px solid black;
+      border-right: 1px solid black;
+    }
+    .likes {
+      width: 50px;
+      border-top: 1px solid black;
+      border-bottom: 1px solid black;
+      border-right: 1px solid black;
+    }
+    .time {
+      width: 150px;
+      border-top: 1px solid black;
+      border-bottom: 1px solid black;
+      border-right: 1px solid black;
+    }
   }
   @media (min-width: 992px) {
-    width: 170px;
-    height: 150px;
+    .postNum {
+      width: 60px;
+      border: 1px solid black;
+    }
+    .writer {
+      width: 150px;
+      border-top: 1px solid black;
+      border-bottom: 1px solid black;
+      border-right: 1px solid black;
+    }
+    .title {
+      flex: 1;
+      border-top: 1px solid black;
+      border-bottom: 1px solid black;
+      border-right: 1px solid black;
+    }
+    .likes {
+      width: 60px;
+      border-top: 1px solid black;
+      border-bottom: 1px solid black;
+      border-right: 1px solid black;
+    }
+    .time {
+      width: 150px;
+      border-top: 1px solid black;
+      border-bottom: 1px solid black;
+      border-right: 1px solid black;
+    }
   }
   @media (min-width: 1200px) {
-    width: 170px;
-    height: 150px;
+    .postNum {
+      width: 80px;
+      border: 1px solid black;
+    }
+    .writer {
+      width: 150px;
+      border-top: 1px solid black;
+      border-bottom: 1px solid black;
+      border-right: 1px solid black;
+    }
+    .title {
+      flex: 1;
+      border-top: 1px solid black;
+      border-bottom: 1px solid black;
+      border-right: 1px solid black;
+    }
+    .likes {
+      width: 80px;
+      border-top: 1px solid black;
+      border-bottom: 1px solid black;
+      border-right: 1px solid black;
+    }
+    .time {
+      width: 150px;
+      border-top: 1px solid black;
+      border-bottom: 1px solid black;
+      border-right: 1px solid black;
+    }
   }
 `;
 
-const TextContent = styled.span`
-  overflow: hidden;
-  height: 100%;
-  font-family: "Noto Sans KR", sans-serif;
-  font-size: 18px;
-  line-height: 1.8;
-  @media (max-width: 760px) {
-    width: 240px;
-    font-size: 14px;
-  }
-  @media (min-width: 760px) {
-    width: 410px;
-  }
-  @media (min-width: 992px) {
-    width: 540px;
-  }
-  @media (min-width: 1200px) {
-    width: 580px;
-  }
-`;
-const Writer = styled.span`
-  overflow: hidden;
-  border-left: 2px solid #333333;
-  border-right: 2px solid #333333;
-  height: 80%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding-bottom: 5px;
-  font-family: "Noto Sans JP", sans-serif;
-
-  @media (max-width: 760px) {
-    height: 90%;
-    width: 100px;
-    font-size: 12px;
-  }
-  @media (min-width: 760px) {
-    width: 70px;
-    font-size: 15px;
-  }
-  @media (min-width: 992px) {
-    width: 100px;
-    font-size: 18px;
-  }
-  @media (min-width: 1200px) {
-    width: 130px;
-    font-size: 20px;
-  }
+const Content = styled(Container)`
+  width: 100%;
+  height: 500px;
+  background-color: tomato;
+  margin-top: 30px;
+  margin-bottom: 30px;
 `;
 
-const Time = styled.div`
-  overflow: hidden;
-  border-right: 2px solid #333333;
-  height: 80%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  font-family: "Noto Sans JP", sans-serif;
-
-  @media (max-width: 760px) {
-    display: none;
-  }
-  @media (min-width: 760px) {
-    width: 60px;
-    font-size: 5px;
-    padding: 0;
-    margin: 0;
-  }
-  @media (min-width: 992px) {
-    width: 90px;
-    font-size: 13px;
-  }
-  @media (min-width: 1200px) {
-    width: 120px;
-    font-size: 18px;
-  }
-`;
-
-const Time_Right = styled.div`
-  overflow: hidden;
-  border-left: 2px solid #333333;
-  height: 80%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  font-family: "Noto Sans JP", sans-serif;
-
-  @media (max-width: 760px) {
-    display: none;
-  }
-  @media (min-width: 760px) {
-    width: 60px;
-    font-size: 5px;
-    padding: 0;
-    margin: 0;
-  }
-  @media (min-width: 992px) {
-    width: 90px;
-    font-size: 13px;
-  }
-  @media (min-width: 1200px) {
-    width: 120px;
-    font-size: 18px;
-  }
-`;
-
-const Border = styled.div`
-  width: 50%;
-  border: 1px solid #bbbbbb;
-  margin: 25px;
-`;
-
-const ContentPagination = styled(Pagination)`
-  margin-top: 100px;
-  margin-bottom: 50px;
-  .sr-only {
-    display: none;
+const BackButton = styled(Button)`
+  align-self: flex-start;
+  margin: 20px;
+  opacity: 0.8;
+  svg {
+    width: auto;
+    font-size: 30px;
   }
 `;
 
 const ShowContent = () => {
   return (
-    <ContentContainer>
-      <LeftItemRow xs={4}>
-        <PreviewImage src="./images/15.jpg" />
-        <TextContent>
-          안녕하세요. 저는 이한입니다. 만나서 반가워요. 여러분들은 잘 지내고
-          계시나요? 잘 지내고 계신다니 너무 다행이네요. 오늘 제가 드리고 싶은
-          말씀은 블라블라블라
-        </TextContent>
-        <Writer>LIHANO</Writer>
-        <Time>
-          <span className="Month">21-09-13</span>
-          <span className="Hour">12 : 41</span>
-        </Time>
-      </LeftItemRow>
-      <Border />
-      <LeftItemRow xs={4}>
-        <Time_Right>
-          <span className="Month">21-09-13</span>
-          <span className="Hour">12 : 41</span>
-        </Time_Right>
-        <Writer>LIHANO</Writer>
-        <TextContent>
-          안녕하세요. 저는 이한입니다. 만나서 반가워요. 여러분들은 잘 지내고
-          계시나요? 잘 지내고 계신다니 너무 다행이네요. 오늘 제가 드리고 싶은
-          말씀은 블라블라블라
-        </TextContent>
-        <PreviewImage src="./images/16.jpg" />
-      </LeftItemRow>
-      <Border />
-
-      <LeftItemRow xs={4}>
-        <PreviewImage src="./images/17.jpg" />
-        <TextContent>
-          안녕하세요. 저는 이한입니다. 만나서 반가워요. 여러분들은 잘 지내고
-          계시나요? 잘 지내고 계신다니 너무 다행이네요. 오늘 제가 드리고 싶은
-          말씀은 블라블라블라
-        </TextContent>
-        <Writer>LIHANO</Writer>
-        <Time>
-          <span className="Month">21-09-13</span>
-          <span className="Hour">12 : 41</span>
-        </Time>
-      </LeftItemRow>
-      <Border />
-
-      <LeftItemRow xs={4}>
-        <Time_Right>
-          <span className="Month">21-09-13</span>
-          <span className="Hour">12 : 41</span>
-        </Time_Right>
-        <Writer>LIHANO</Writer>
-        <TextContent>
-          안녕하세요. 저는 이한입니다. 만나서 반가워요. 여러분들은 잘 지내고
-          계시나요? 잘 지내고 계신다니 너무 다행이네요. 오늘 제가 드리고 싶은
-          말씀은 블라블라블라
-        </TextContent>
-        <PreviewImage src="./images/18.jpg" />
-      </LeftItemRow>
-      <Border />
-
-      <LeftItemRow xs={4}>
-        <PreviewImage src="./images/19.jpg" />
-        <TextContent>
-          안녕하세요. 저는 이한입니다. 만나서 반가워요. 여러분들은 잘 지내고
-          계시나요? 잘 지내고 계신다니 너무 다행이네요. 오늘 제가 드리고 싶은
-          말씀은 블라블라블라
-        </TextContent>
-        <Writer>LIHANO</Writer>
-        <Time>
-          <span className="Month">21-09-13</span>
-          <span className="Hour">12 : 41</span>
-        </Time>
-      </LeftItemRow>
-      <Border />
-
-      <LeftItemRow xs={4}>
-        <Time_Right>
-          <span className="Month">21-09-13</span>
-          <span className="Hour">12 : 41</span>
-        </Time_Right>
-        <Writer>LIHANO</Writer>
-        <TextContent>
-          안녕하세요. 저는 이한입니다. 만나서 반가워요. 여러분들은 잘 지내고
-          계시나요? 잘 지내고 계신다니 너무 다행이네요. 오늘 제가 드리고 싶은
-          말씀은 블라블라블라
-        </TextContent>
-        <PreviewImage src="./images/20.jpg" />
-      </LeftItemRow>
-      <ContentPagination>
-        <Pagination.Item key="1" active>
-          1
-        </Pagination.Item>
-        <Pagination.Item key="2">2</Pagination.Item>
-        <Pagination.Item key="3">3</Pagination.Item>
-        <Pagination.Item key="4">4</Pagination.Item>
-        <Pagination.Item key="5">5</Pagination.Item>
-      </ContentPagination>
-    </ContentContainer>
+    <ShowContainer>
+      <HandleBarRow xs="3">
+        <ImArrowLeft />
+        <h2>The Posting Title</h2>
+        <ImArrowRight />
+      </HandleBarRow>
+      <PostInformRow xs="5">
+        <span className="postNum">13</span>
+        <span className="writer">Lihano</span>
+        <span className="title">Posting Title</span>
+        <span className="likes">12</span>
+        <span className="time">21/09/14 12:49</span>
+      </PostInformRow>
+      <Content></Content>
+      <BackButton variant="dark">
+        <IoReturnDownBackSharp />
+      </BackButton>
+    </ShowContainer>
   );
 };
 
