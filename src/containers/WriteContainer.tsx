@@ -5,7 +5,7 @@ import WriteHeader from "../components/write/WriteHeader";
 import SideBar from "../components/write/SideBar";
 import WriteForm from "../components/write/WriteForm";
 
-const ContainerWrite = styled(Container)`
+const ContainerShow = styled(Container)`
   height: 100%;
   padding: 0;
   @media (min-width: 760px) {
@@ -30,7 +30,7 @@ const SecondRow = styled(Row)`
 
 const WriteContainer = () => {
   return (
-    <ContainerWrite>
+    <ContainerShow>
       <SideBar />
       <FirstRow>
         <WriteHeader />
@@ -38,7 +38,7 @@ const WriteContainer = () => {
       <SecondRow>
         <WriteForm />
       </SecondRow>
-    </ContainerWrite>
+    </ContainerShow>
   );
 };
 

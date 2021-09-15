@@ -182,11 +182,9 @@ const PostInformRow = styled(Row)`
 `;
 
 const Content = styled(Container)`
-  width: 100%;
-  height: 500px;
   background-color: tomato;
-  margin-top: 30px;
-  margin-bottom: 30px;
+  margin: 0 30px;
+  padding: 0;
 `;
 
 const BackButton = styled(Button)`
@@ -199,7 +197,12 @@ const BackButton = styled(Button)`
   }
 `;
 
-const ShowContent = () => {
+const Viewer = styled.div`
+  min-height: 40px;
+  border: 1px solid #dddddd;
+`;
+
+const ShowContent = ({ content }: any) => {
   return (
     <ShowContainer>
       <HandleBarRow xs="3">
@@ -214,7 +217,12 @@ const ShowContent = () => {
         <span className="likes">12</span>
         <span className="time">21/09/14 12:49</span>
       </PostInformRow>
-      <Content></Content>
+      <Content>
+        <Viewer
+          className="ck-content"
+          dangerouslySetInnerHTML={{ __html: content }}
+        ></Viewer>
+      </Content>
       <BackButton variant="dark">
         <IoReturnDownBackSharp />
       </BackButton>
