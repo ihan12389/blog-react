@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
-import { DropdownButton, Dropdown, ButtonGroup } from "react-bootstrap";
+import { DropdownButton, Dropdown } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const SideMenu = styled(DropdownButton)`
   margin: 3px;
@@ -32,7 +33,9 @@ const SideBar = () => {
       variant="outline-secondary"
       title="Menu"
     >
-      <Dropdown.Item>Main</Dropdown.Item>
+      <Dropdown.Item as={Link} to="/">
+        Main
+      </Dropdown.Item>
       <Dropdown.Item>Logout</Dropdown.Item>
     </SideMenu>
   );

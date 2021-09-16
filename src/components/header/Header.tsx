@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Carousel, Container, Image, Button } from "react-bootstrap";
 import "../../style/fonts.css";
+import { Link } from "react-router-dom";
 
 const HeaderContainer = styled(Container)`
   height: 100%;
@@ -111,12 +112,16 @@ const Header = () => {
         <span>LiHano's Blog</span>
       </LabelContainer>
       <AuthContainer>
-        <AuthButton variant="dark" size="lg">
-          Log In
-        </AuthButton>
-        <AuthButton variant="dark" size="lg">
-          Sign Up
-        </AuthButton>
+        <Link to="/login">
+          <AuthButton variant="dark" size="lg">
+            Log In
+          </AuthButton>
+        </Link>
+        <Link to="/signup">
+          <AuthButton variant="dark" size="lg">
+            Sign Up
+          </AuthButton>
+        </Link>
       </AuthContainer>
     </HeaderContainer>
   );

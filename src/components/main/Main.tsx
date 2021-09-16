@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Container, Row, Card, Button } from "react-bootstrap";
 import "../../style/fonts.css";
+import { Link } from "react-router-dom";
 
 const MainContainer = styled(Container)`
   display: flex;
@@ -145,9 +146,11 @@ const Main = () => {
           </div>
         </Row>
       </GridContainer>
-      <GoPostsButton variant="secondary" size="lg">
-        Show More Posts!
-      </GoPostsButton>
+      <Link to="posts">
+        <GoPostsButton variant="secondary" size="lg">
+          Show More Posts!
+        </GoPostsButton>
+      </Link>
     </MainContainer>
   );
 };
