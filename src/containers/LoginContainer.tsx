@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Form, Button } from "react-bootstrap";
 import styled from "styled-components";
 import "../style/fonts.css";
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "../reducers";
+import { login } from "../apis/auth";
+import { AuthActions } from "../actions/auth";
 
 const LoginWrapper = styled(Container)`
   padding: 0;
@@ -73,14 +77,49 @@ const ButtonWrapper = styled(Container)`
   margin-bottom: 30px;
 `;
 
-const LoginContainer = () => {
+const LoginContainer = ({ history }: any) => {
+  const authState = useSelector((state: RootState) => state.auth);
+  const dispatch = useDispatch();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const updateEmail = (event: any) => {
+    setEmail(event.target.value);
+  };
+  const updatePassword = (event: any) => {
+    setPassword(event.target.value);
+  };
+
+  const submitt = (event: any) => {
+    event.preventDefault();
+    if (!authState.loggingIn && password.length > 0 && email.length > 0) {
+      dispatch(AuthActions.login({ email, password }));
+      setPassword("");
+    } else {
+      alert("텍스트를 입력해주세요.");
+    }
+  };
+
+  useEffect(() => {
+    console.log(authState);
+    if (authState.uid !== undefined) {
+      alert("로그인에 성공했습니다.");
+      history.push("/");
+    }
+  }, [authState]);
+
   return (
     <LoginWrapper>
       <span className="loginTitle">WELCOME! LOG IN HERE</span>
-      <LoginForm>
+      <LoginForm onSubmit={submitt}>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email Address</Form.Label>
-          <Form.Control type="email" placeholder="Enter Email" />
+          <Form.Control
+            type="email"
+            placeholder="Enter Email"
+            value={email}
+            onChange={updateEmail}
+          />
           <Form.Text className="text-muted">
             We'll never share your email with anyone else
           </Form.Text>
@@ -88,7 +127,12 @@ const LoginContainer = () => {
 
         <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label>Password</Form.Label>
-          <Form.Control type="password" placeholder="password" />
+          <Form.Control
+            type="password"
+            placeholder="password"
+            value={password}
+            onChange={updatePassword}
+          />
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicCheckbox">
           <Form.Check type="checkbox" label="Check me out" />

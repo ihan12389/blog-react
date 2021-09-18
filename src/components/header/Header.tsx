@@ -24,6 +24,7 @@ const HeaderCarousel = styled(Carousel)`
     width: 100%;
     height: 100%;
     opacity: 0.9;
+    object-fit: cover;
   }
   .sr-only {
     display: none;

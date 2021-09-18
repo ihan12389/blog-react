@@ -38,6 +38,7 @@ const LeftItemRow = styled(Row)`
 const PreviewImage = styled(Image)`
   margin: 0;
   padding: 0;
+  object-fit: cover;
   @media (max-width: 760px) {
     width: 130px;
     height: 120px;

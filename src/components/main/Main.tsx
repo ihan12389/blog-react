@@ -63,6 +63,9 @@ const MainCard = styled(Card)`
     white-space: nowrap;
     overflow: hidden;
   }
+  img {
+    object-fit: cover;
+  }
   @media (max-width: 760px) {
     height: 250px;
     img {

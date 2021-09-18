@@ -1,7 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import { DropdownButton, Dropdown } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { AuthActions } from "../../actions/auth";
+import { IoAlertCircleSharp } from "react-icons/io5";
 
 const SideMenu = styled(DropdownButton)`
   margin: 3px;
@@ -27,6 +30,13 @@ const SideMenu = styled(DropdownButton)`
 `;
 
 const SideBar = () => {
+  const dispatch = useDispatch();
+
+  const logout = () => {
+    dispatch(AuthActions.logout());
+    alert("로그아웃 했습니다.");
+  };
+
   return (
     <SideMenu
       id="dropdown-item-button"
@@ -36,7 +46,7 @@ const SideBar = () => {
       <Dropdown.Item as={Link} to="/">
         Main
       </Dropdown.Item>
-      <Dropdown.Item>Logout</Dropdown.Item>
+      <Dropdown.Item onClick={logout}>Logout</Dropdown.Item>
     </SideMenu>
   );
 };
