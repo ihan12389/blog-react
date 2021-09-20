@@ -1,5 +1,3 @@
-import { LoginData, Auth } from "../types/auth";
-
 export enum AuthTypes {
   LOGIN_REQUEST = "auth/LOGIN_REQUEST",
   LOGIN_SUCCESS = "auth/LOGIN_SUCCESS",
@@ -8,6 +6,10 @@ export enum AuthTypes {
   CHANGE_MESSAGE = "auth/CHANGE_MESSAGE",
 }
 
+export interface LoginData {
+  email: string;
+  password: string;
+}
 // 로그인 요청하는 액션의 인터페이스
 export interface LoginAction {
   type: AuthTypes.LOGIN_REQUEST;

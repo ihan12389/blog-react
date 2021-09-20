@@ -190,7 +190,7 @@ const WriteForm = (props: any) => {
         }}
       />
       <ButtonWrapper>
-        <Button variant="outline-dark">
+        <Button variant="outline-dark" onClick={() => props.go.goBack()}>
           <IoReturnDownBackSharp />
         </Button>
         <Button className="submit" variant="outline-primary">

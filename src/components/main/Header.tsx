@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { Carousel, Container, Image, Button } from "react-bootstrap";
 import "../../style/fonts.css";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { RootState } from "../../reducers";
 
 const HeaderContainer = styled(Container)`
   height: 100%;
@@ -57,7 +59,7 @@ const AuthContainer = styled(Container)`
 `;
 
 const AuthButton = styled(Button)`
-  opacity: 0.7;
+  opacity: 0.6;
   @media (max-width: 760px) {
     gap: 30px;
     width: 120px;
@@ -66,6 +68,20 @@ const AuthButton = styled(Button)`
   @media (min-width: 760px) {
     width: 130px;
     height: 60px;
+  }
+`;
+
+const PostButton = styled(Button)`
+  opacity: 0.6;
+  @media (max-width: 760px) {
+    width: 230px;
+    height: 55px;
+    font-size: 20px;
+  }
+  @media (min-width: 760px) {
+    width: 250px;
+    height: 55px;
+    font-size: 20px;
   }
 `;
 
@@ -96,6 +112,12 @@ const LabelContainer = styled(Container)`
 `;
 
 const Header = () => {
+  const authState = useSelector((state: RootState) => state.auth);
+
+  useEffect(() => {
+    console.log(authState);
+  }, []);
+
   return (
     <HeaderContainer>
       <HeaderCarousel>
@@ -112,18 +134,26 @@ const Header = () => {
       <LabelContainer>
         <span>LiHano's Blog</span>
       </LabelContainer>
-      <AuthContainer>
-        <Link to="/login">
-          <AuthButton variant="dark" size="lg">
-            Log In
-          </AuthButton>
-        </Link>
-        <Link to="/signup">
-          <AuthButton variant="dark" size="lg">
-            Sign Up
-          </AuthButton>
-        </Link>
-      </AuthContainer>
+      {authState.uid === undefined ? (
+        <AuthContainer>
+          <Link to="/login">
+            <AuthButton variant="dark" size="lg">
+              Log In
+            </AuthButton>
+          </Link>
+          <Link to="/signup">
+            <AuthButton variant="dark" size="lg">
+              Sign Up
+            </AuthButton>
+          </Link>
+        </AuthContainer>
+      ) : (
+        <AuthContainer>
+          <Link to="/posts">
+            <PostButton variant="danger">Go to the Posts Page!</PostButton>
+          </Link>
+        </AuthContainer>
+      )}
     </HeaderContainer>
   );
 };

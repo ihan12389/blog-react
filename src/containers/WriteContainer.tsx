@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { Container, Row } from "react-bootstrap";
 import WriteHeader from "../components/write/WriteHeader";
 import SideBar from "../components/write/SideBar";
 import WriteForm from "../components/write/WriteForm";
+import { useSelector } from "react-redux";
+import { RootState } from "../reducers";
+import { Redirect } from "react-router";
 
 const ContainerShow = styled(Container)`
   height: 100%;
@@ -28,16 +31,33 @@ const SecondRow = styled(Row)`
   margin: 0;
 `;
 
-const WriteContainer = () => {
+const WriteContainer = ({ history }: any) => {
+  const authState = useSelector((state: RootState) => state.auth);
+
+  useEffect(() => {
+    if (authState.uid === undefined) {
+      alert("you must Log in");
+      history.push("/");
+    }
+  }, [authState]);
+
   return (
     <ContainerShow>
-      <SideBar />
-      <FirstRow>
-        <WriteHeader />
-      </FirstRow>
-      <SecondRow>
-        <WriteForm />
-      </SecondRow>
+      {authState.uid !== undefined ? (
+        <>
+          <SideBar />
+          <FirstRow>
+            <WriteHeader />
+          </FirstRow>
+          <SecondRow>
+            <WriteForm go={history} />
+          </SecondRow>
+        </>
+      ) : (
+        <>
+          <Redirect to="/" />
+        </>
+      )}
     </ContainerShow>
   );
 };

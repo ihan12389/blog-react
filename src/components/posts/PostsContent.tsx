@@ -1,8 +1,12 @@
 import React from "react";
 import styled from "styled-components";
-import { Container, Row, Image, Pagination } from "react-bootstrap";
+import { Container, Row, Image, Button } from "react-bootstrap";
 import "../../style/fonts.css";
 import PostsSearch from "../search/PostsSearch";
+import { Link } from "react-router-dom";
+import PaginationComponent from "./pagination";
+import { useSelector } from "react-redux";
+import { RootState } from "../../reducers";
 
 const ContentContainer = styled(Container)`
   width: 100%;
@@ -171,18 +175,30 @@ const Border = styled.div`
   margin: 25px;
 `;
 
-const ContentPagination = styled(Pagination)`
-  margin-top: 100px;
-  margin-bottom: 50px;
-  .sr-only {
-    display: none;
+const WriteButton = styled(Button)`
+  position: relative;
+  margin-top: 50px;
+  @media (max-width: 760px) {
+    left: 190px;
+  }
+  @media (min-width: 760px) {
+    font-size: 20px;
+    left: 300px;
+  }
+  @media (min-width: 992px) {
+    left: 400px;
+  }
+  @media (min-width: 1200px) {
+    left: 450px;
   }
 `;
 
 const PostsContent = () => {
+  const authState = useSelector((state: RootState) => state.auth);
   return (
     <ContentContainer>
       <PostsSearch />
+
       <LeftItemRow xs={4}>
         <PreviewImage src="./images/15.jpg" />
         <TextContent>
@@ -270,15 +286,15 @@ const PostsContent = () => {
         </TextContent>
         <PreviewImage src="./images/20.jpg" />
       </LeftItemRow>
-      <ContentPagination>
-        <Pagination.Item key="1" active>
-          1
-        </Pagination.Item>
-        <Pagination.Item key="2">2</Pagination.Item>
-        <Pagination.Item key="3">3</Pagination.Item>
-        <Pagination.Item key="4">4</Pagination.Item>
-        <Pagination.Item key="5">5</Pagination.Item>
-      </ContentPagination>
+      {authState.uid !== undefined ? (
+        <Link to="/write">
+          <WriteButton variant="outline-secondary">Write</WriteButton>
+        </Link>
+      ) : (
+        <></>
+      )}
+
+      <PaginationComponent />
     </ContentContainer>
   );
 };

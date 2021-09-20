@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Container, Form, Button } from "react-bootstrap";
 import styled from "styled-components";
 import "../style/fonts.css";
-import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../reducers";
 import { login } from "../apis/auth";
@@ -138,9 +137,9 @@ const LoginContainer = ({ history }: any) => {
           <Form.Check type="checkbox" label="Check me out" />
         </Form.Group>
         <ButtonWrapper>
-          <Link to="/">
-            <Button variant="dark">Back</Button>
-          </Link>
+          <Button variant="dark" onClick={() => history.goBack()}>
+            Back
+          </Button>
           <Button variant="primary" type="submit">
             Submit
           </Button>

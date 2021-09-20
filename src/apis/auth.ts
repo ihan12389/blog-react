@@ -1,17 +1,9 @@
-import { StringableActionCreator } from "@redux-saga/types";
 import axios from "axios";
-import { ResponsiveEmbed } from "react-bootstrap";
 
 // 회원가입 리퀘스트 객체 데이터 인터페이스
 interface SignupRequestDto {
   email: string;
   password: string;
-  nickname: string;
-}
-
-// 로그인 리스폰스 객체 데이터 인터페이스
-interface LoginRequestDto {
-  email: string;
   nickname: string;
 }
 

@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Container, Row } from "react-bootstrap";
-import Header from "../components/header/Header";
+import Header from "../components/main/Header";
 import HeaderSearch from "../components/search/HeaderSearch";
 import Main from "../components/main/Main";
 

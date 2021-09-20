@@ -28,7 +28,7 @@ const SecondRow = styled(Row)`
   margin: 0;
 `;
 
-const ShowContainer = () => {
+const ShowContainer = ({ history }: any) => {
   return (
     <ContainerShow>
       <SideBar />
@@ -36,7 +36,7 @@ const ShowContainer = () => {
         <ShowHeader />
       </FirstRow>
       <SecondRow>
-        <ShowContent />
+        <ShowContent a={history} />
       </SecondRow>
     </ContainerShow>
   );

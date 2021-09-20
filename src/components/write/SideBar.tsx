@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { AuthActions } from "../../actions/auth";
 import { DropdownButton, Dropdown, ButtonGroup } from "react-bootstrap";
 
 const SideMenu = styled(DropdownButton)`
   margin: 3px;
   position: absolute;
+  font-family: "Righteous", cursive;
   @media (max-width: 760px) {
     position: relative;
     margin-bottom: 30px;
@@ -26,14 +30,23 @@ const SideMenu = styled(DropdownButton)`
 `;
 
 const SideBar = () => {
+  const dispatch = useDispatch();
+
+  const logout = () => {
+    dispatch(AuthActions.logout());
+    alert("로그아웃 했습니다.");
+  };
+
   return (
     <SideMenu
       id="dropdown-item-button"
       variant="outline-secondary"
       title="Menu"
     >
-      <Dropdown.Item>Main</Dropdown.Item>
-      <Dropdown.Item>Logout</Dropdown.Item>
+      <Dropdown.Item as={Link} to="/">
+        Main
+      </Dropdown.Item>
+      <Dropdown.Item onClick={logout}>Logout</Dropdown.Item>
     </SideMenu>
   );
 };

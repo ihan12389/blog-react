@@ -202,7 +202,7 @@ const Viewer = styled.div`
   border: 1px solid #dddddd;
 `;
 
-const ShowContent = ({ content }: any) => {
+const ShowContent = ({ content, a }: any) => {
   return (
     <ShowContainer>
       <HandleBarRow xs="3">
@@ -223,7 +223,7 @@ const ShowContent = ({ content }: any) => {
           dangerouslySetInnerHTML={{ __html: content }}
         ></Viewer>
       </Content>
-      <BackButton variant="dark">
+      <BackButton variant="outline-dark" onClick={() => a.goBack()}>
         <IoReturnDownBackSharp />
       </BackButton>
     </ShowContainer>

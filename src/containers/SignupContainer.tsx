@@ -2,9 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Container, Form, Button } from "react-bootstrap";
 import styled from "styled-components";
 import "../style/fonts.css";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { RootState } from "../reducers";
-import { AuthState } from "../reducers/auth";
 import { useSelector, useDispatch } from "react-redux";
 import { signup } from "../apis/auth";
 
@@ -178,9 +177,9 @@ const SignupContainer = ({ history }: any) => {
         </Form.Group>
 
         <ButtonWrapper>
-          <Link to="/">
-            <Button variant="dark">Back</Button>
-          </Link>
+          <Button variant="dark" onClick={() => history.goBack()}>
+            Back
+          </Button>
           <Button variant="primary" type="submit">
             Submit
           </Button>
