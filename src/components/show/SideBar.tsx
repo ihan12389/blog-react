@@ -6,6 +6,7 @@ import { AuthActions } from "../../actions/auth";
 import { RootState } from "../../reducers";
 import { DropdownButton, Dropdown, ButtonGroup } from "react-bootstrap";
 
+/* STYLE */
 const SideMenu = styled(DropdownButton)`
   margin: 3px;
   position: absolute;
@@ -31,9 +32,10 @@ const SideMenu = styled(DropdownButton)`
 `;
 
 const SideBar = () => {
+  /* REDUX */
   const dispatch = useDispatch();
   const authState = useSelector((state: RootState) => state.auth);
-
+  /* LOGOUT */
   const logout = () => {
     dispatch(AuthActions.logout());
     alert("로그아웃 했습니다.");

@@ -8,6 +8,7 @@ import PaginationComponent from "./pagination";
 import { useSelector } from "react-redux";
 import { RootState } from "../../reducers";
 
+/* STYLE */
 const ContentContainer = styled(Container)`
   width: 100%;
   display: flex;
@@ -194,6 +195,7 @@ const WriteButton = styled(Button)`
 `;
 
 const PostsContent = () => {
+  /* REDUX */
   const authState = useSelector((state: RootState) => state.auth);
   return (
     <ContentContainer>

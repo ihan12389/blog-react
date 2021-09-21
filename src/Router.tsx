@@ -14,8 +14,7 @@ const Router = () => {
         <Route path="/" exact component={MainContainer}></Route>
         <Route path="/posts" component={PostsContainer}></Route>
         <Route path="/posts/:page" component={PostsContainer}></Route>
-        <Route path="/show" component={ShowContainer}></Route>
-        <Route path="/show/postId" component={ShowContainer}></Route>
+        <Route path="/show/:postId" component={ShowContainer}></Route>
         <Route path="/write" component={WriteContainer}></Route>
         <Route path="/login" component={LoginContainer}></Route>
         <Route path="/signup" component={SignupContainer}></Route>

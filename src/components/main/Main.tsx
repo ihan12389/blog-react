@@ -4,6 +4,7 @@ import { Container, Row, Card, Button } from "react-bootstrap";
 import "../../style/fonts.css";
 import { Link } from "react-router-dom";
 
+/* STYLE */
 const MainContainer = styled(Container)`
   display: flex;
   flex-direction: column;
@@ -20,7 +21,6 @@ const Title = styled.span`
   padding-bottom: 20px;
   text-transform: uppercase;
 
-  // 760 이상일 때 적용
   @media (max-width: 760px) {
     font-size: 38px;
   }

@@ -2,6 +2,7 @@ import React from "react";
 import { Pagination } from "react-bootstrap";
 import styled from "styled-components";
 
+/* STYLE */
 const ContentPagination = styled(Pagination)`
   margin-top: 100px;
   margin-bottom: 50px;

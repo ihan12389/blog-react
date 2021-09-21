@@ -1,7 +1,8 @@
 import { all, fork } from "redux-saga/effects";
 import authSaga from "./auth";
+import postSaga from "./post";
 
-// Saga 함수들을 하나로 합칩니다.
+/* BIND SAGA FUNCTIONS */
 export default function* rootSaga() {
-  yield all([fork(authSaga)]);
+  yield all([fork(authSaga), fork(postSaga)]);
 }

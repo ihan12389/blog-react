@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "../../reducers";
 
+/* STYLE */
 const HeaderContainer = styled(Container)`
   height: 100%;
   width: 100%;
@@ -112,11 +113,8 @@ const LabelContainer = styled(Container)`
 `;
 
 const Header = () => {
+  /* REDUX */
   const authState = useSelector((state: RootState) => state.auth);
-
-  useEffect(() => {
-    console.log(authState);
-  }, []);
 
   return (
     <HeaderContainer>

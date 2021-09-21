@@ -7,6 +7,7 @@ import { RootState } from "../reducers";
 import { login } from "../apis/auth";
 import { AuthActions } from "../actions/auth";
 
+/* STYLE */
 const LoginWrapper = styled(Container)`
   padding: 0;
   background-image: url("./images/13.jpg");
@@ -55,6 +56,7 @@ const LoginForm = styled(Form)`
     color: white;
   }
   .text-muted {
+    color: red;
   }
   @media (min-width: 760px) {
   }
@@ -67,6 +69,11 @@ const LoginForm = styled(Form)`
   }
 `;
 
+const ErrMsg = styled.span`
+  color: red;
+  font-weight: bold;
+`;
+
 const ButtonWrapper = styled(Container)`
   margin: 0;
   padding: 0;
@@ -77,32 +84,45 @@ const ButtonWrapper = styled(Container)`
 `;
 
 const LoginContainer = ({ history }: any) => {
+  /* REDUX */
   const authState = useSelector((state: RootState) => state.auth);
   const dispatch = useDispatch();
-
+  /* USESTATE */
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errMsg, setErrMsg] = useState("");
+  const [emailCheck, setEmailCheck] = useState("");
+  const [passwordCheck, setPasswordCheck] = useState("");
+  /* INPUT TEXT */
   const updateEmail = (event: any) => {
     setEmail(event.target.value);
   };
   const updatePassword = (event: any) => {
     setPassword(event.target.value);
   };
-
+  /* SUBMIT */
   const submitt = (event: any) => {
     event.preventDefault();
-    if (!authState.loggingIn && password.length > 0 && email.length > 0) {
-      dispatch(AuthActions.login({ email, password }));
-      setPassword("");
+    if (email.replaceAll(" ", "").length === 0) {
+      setEmailCheck("이메일을 입력해주세요");
+      return;
     } else {
-      alert("텍스트를 입력해주세요.");
+      setEmailCheck("");
     }
-  };
+    if (password.length === 0) {
+      setPasswordCheck("비밀번호를 입력해주세요.");
+      return;
+    } else {
+      setPasswordCheck("");
+    }
 
+    dispatch(AuthActions.login({ email, password }));
+    setErrMsg(authState.loginFailureMsg);
+    setPassword("");
+  };
+  /* INIT SETTING */
   useEffect(() => {
-    console.log(authState);
     if (authState.uid !== undefined) {
-      alert("로그인에 성공했습니다.");
       history.push("/");
     }
   }, [authState]);
@@ -121,6 +141,8 @@ const LoginContainer = ({ history }: any) => {
           />
           <Form.Text className="text-muted">
             We'll never share your email with anyone else
+            <br />
+            {emailCheck === "" ? <></> : <ErrMsg>{emailCheck}</ErrMsg>}
           </Form.Text>
         </Form.Group>
 
@@ -132,10 +154,17 @@ const LoginContainer = ({ history }: any) => {
             value={password}
             onChange={updatePassword}
           />
+          <Form.Text className="text-muted">
+            {passwordCheck === "" ? <></> : <ErrMsg>{passwordCheck}</ErrMsg>}
+          </Form.Text>
         </Form.Group>
+
         <Form.Group className="mb-3" controlId="formBasicCheckbox">
           <Form.Check type="checkbox" label="Check me out" />
         </Form.Group>
+
+        {errMsg !== "" ? <ErrMsg>{errMsg}</ErrMsg> : <></>}
+
         <ButtonWrapper>
           <Button variant="dark" onClick={() => history.goBack()}>
             Back

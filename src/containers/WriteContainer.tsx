@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../reducers";
 import { Redirect } from "react-router";
 
+/* STYLE */
 const ContainerShow = styled(Container)`
   height: 100%;
   padding: 0;
@@ -32,12 +33,12 @@ const SecondRow = styled(Row)`
 `;
 
 const WriteContainer = ({ history }: any) => {
+  /* REUDX */
   const authState = useSelector((state: RootState) => state.auth);
-
+  /* INIT SETTING */
   useEffect(() => {
     if (authState.uid === undefined) {
       alert("you must Log in");
-      history.push("/");
     }
   }, [authState]);
 

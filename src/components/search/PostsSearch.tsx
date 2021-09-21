@@ -8,6 +8,7 @@ import {
 } from "react-bootstrap";
 import styled from "styled-components";
 
+/* STYLE */
 const SearchContainer = styled(Container)`
   width: 200px;
   position: relative;
@@ -108,16 +109,19 @@ const SearchInputGroup = styled(InputGroup)`
   }
 `;
 
+/* CHANGE DROPDOWN BUTTON TEXT */
 function clickButton(event: any) {
   const text = event.target.innerHTML;
   document.querySelector("#segmented-button-dropdown-2")!.innerHTML = text;
 }
 
 const PostsSearch = () => {
+  /* INIT SETTING */
   useEffect(() => {
     document.querySelector("#segmented-button-dropdown-2")!.innerHTML =
       "Select";
   }, []);
+
   return (
     <SearchContainer>
       <SearchInputGroup className="mb-3">

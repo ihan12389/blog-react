@@ -1,3 +1,4 @@
+/* ENUM AUTH ACTION TYPES */
 export enum AuthTypes {
   LOGIN_REQUEST = "auth/LOGIN_REQUEST",
   LOGIN_SUCCESS = "auth/LOGIN_SUCCESS",
@@ -5,18 +6,17 @@ export enum AuthTypes {
   LOGOUT = "auth/LOGOUT",
   CHANGE_MESSAGE = "auth/CHANGE_MESSAGE",
 }
-
+/* LOGIN DATA INTERFACE */
 export interface LoginData {
   email: string;
   password: string;
 }
-// 로그인 요청하는 액션의 인터페이스
+/* LOGIN REQUEST ACTION INTERFACE */
 export interface LoginAction {
   type: AuthTypes.LOGIN_REQUEST;
   payload: LoginData;
 }
-
-// 로그인 성공 액션의 인터페이스
+/* LOGIN SUCCESS ACTION INTERFACE */
 export interface LoginSuccessAction {
   type: AuthTypes.LOGIN_SUCCESS;
   payload: {
@@ -26,42 +26,37 @@ export interface LoginSuccessAction {
     nickname: string;
   };
 }
-
-// 로그인 실패 액션의 인터페이스
+/* LOGIN FAILURE ACTION INTERFACE */
 export interface LoginFailureAction {
   type: AuthTypes.LOGIN_FAILURE;
   payload: string;
 }
-
-// 로그아웃 액션의 인터페이스
+/* LOGOUT ACTION INTERFACE */
 export interface LogoutAction {
   type: AuthTypes.LOGOUT;
 }
-
-// 로그인 실패 등에 따른 메세지
+/* CHANGE MESSAGE ACTION INTERFACE */
 export interface ChangeMessageAction {
   type: AuthTypes.CHANGE_MESSAGE;
   payload: string;
 }
-
+/* AUTH ACTION TYPES EXPORT */
 export type AuthActionTypes =
   | LoginAction
   | LoginSuccessAction
   | LoginFailureAction
   | LogoutAction
   | ChangeMessageAction;
-
-// 로그인 액션 생성 함수
+/* LOGIN REQUEST ACTION CREATE FUNCTION */
 export const login = (loginData: LoginData): LoginAction => ({
   type: AuthTypes.LOGIN_REQUEST,
   payload: loginData,
 });
-
-// 로그아웃 액션 생성 함수
+/* LOGOUT ACTION CREATE FUNCTION */
 export const logout = (): LogoutAction => ({
   type: AuthTypes.LOGOUT,
 });
-
+/* EXPORT AUTH ACTION CREATE FUNCTION */
 export const AuthActions = {
   login,
   logout,

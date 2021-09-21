@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { Container, Button } from "react-bootstrap";
+import { Container, Button, InputGroup, FormControl } from "react-bootstrap";
 import { IoReturnDownBackSharp } from "react-icons/io5";
 import CKEditor from "@ckeditor/ckeditor5-react";
 import DecoupledEditor from "@ckeditor/ckeditor5-editor-decoupled/src/decouplededitor";
@@ -30,7 +30,11 @@ import IndentBlock from "@ckeditor/ckeditor5-indent/src/indentblock";
 import TableProperties from "@ckeditor/ckeditor5-table/src/tableproperties";
 import TableCellProperties from "@ckeditor/ckeditor5-table/src/tablecellproperties";
 import Base64UploadAdapter from "@ckeditor/ckeditor5-upload/src/adapters/base64uploadadapter";
+import { useSelector, useDispatch } from "react-redux";
+import { write, PostActions } from "../../actions/post";
+import { RootState } from "../../reducers";
 
+/* STYLE */
 const FormWrapper = styled(Container)`
   .ck-editor__editable_inline {
     min-height: 200px;
@@ -51,10 +55,73 @@ const ButtonWrapper = styled(Container)`
 `;
 
 const WriteForm = (props: any) => {
-  const defaultString = "Hello, This is CKEditor~~";
-  const [content, setContent] = useState(defaultString);
+  /* REDUX */
+  const authState = useSelector((state: RootState) => state.auth);
+  const dispatch = useDispatch();
+  /* USESTATE */
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+  /* UPLOAD */
+  const upload = async (event: any) => {
+    // 입력 안한 내용이 있다면
+    if (title.replaceAll(" ", "") === "") {
+      alert("제목을 입력해주세요.");
+      return;
+    }
+    if (content.replaceAll(" ", "") === "") {
+      alert("내용을 입력해주세요.");
+      return;
+    }
+
+    /* 날짜 구하기 */
+    const D = new Date();
+    const year = D.getFullYear();
+    const month = D.getMonth() + 1;
+    const date = D.getDate();
+    const hour = D.getHours();
+    const minute = D.getMinutes();
+
+    const date_string = `${String(year).substring(2)}-${
+      month < 10 ? `0${month}` : month
+    }-${date < 10 ? `0${date}` : date}\n${hour < 10 ? `0${hour}` : hour}:${
+      minute < 10 ? `0${minute}` : minute
+    }`;
+
+    /* 프리뷰 이미지 링크 구하기 */
+    const indexOfStart = content.indexOf("src=");
+    const indexOfLast = content.indexOf("></figure>");
+    let imgSrc = "";
+    if (indexOfStart === -1) {
+      imgSrc = "";
+    } else {
+      imgSrc = content.substring(indexOfStart + 5, indexOfLast);
+    }
+
+    /* DISPATCH */
+    await dispatch(
+      PostActions.write({
+        title: title,
+        content: content,
+        uid: authState.uid,
+        nickname: authState.nickname,
+        date: date_string,
+        previewImg: imgSrc,
+        likes: 0,
+      })
+    );
+  };
+
   return (
     <FormWrapper>
+      <InputGroup className="mb-3">
+        <InputGroup.Text id="inputGroup-sizing-default">Title</InputGroup.Text>
+        <FormControl
+          aria-label="Default"
+          aria-describedby="inputGroup-sizing-default"
+          value={title}
+          onChange={(event): any => setTitle(event.target.value)}
+        />
+      </InputGroup>
       <CKEditor
         onInit={(editor: any) => {
           editor.ui
@@ -186,14 +253,13 @@ const WriteForm = (props: any) => {
         onChange={(event: any, editor: any) => {
           const data = editor.getData();
           setContent(data);
-          console.log({ event, editor, data });
         }}
       />
       <ButtonWrapper>
         <Button variant="outline-dark" onClick={() => props.go.goBack()}>
           <IoReturnDownBackSharp />
         </Button>
-        <Button className="submit" variant="outline-primary">
+        <Button className="submit" variant="outline-primary" onClick={upload}>
           Upload
         </Button>
       </ButtonWrapper>

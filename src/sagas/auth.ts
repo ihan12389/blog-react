@@ -2,22 +2,23 @@ import { all, put, call, takeLatest } from "redux-saga/effects";
 import { AuthTypes, LoginAction } from "../actions/auth";
 import * as authApi from "../apis/auth";
 
-// Auth Saga 묶기
+/* BIND AUTH SAGA FUNCTIONS */
 export default function* authSaga() {
   yield all([takeLatest(AuthTypes.LOGIN_REQUEST, login$)]);
 }
 
-// 로그인 요청이 발생했을 때
+/* LOGIN REQUEST TRIGGER SAGA FUNCTION */
 function* login$(action: LoginAction) {
   try {
+    // GET REQUEST DATA
     const loginData = action.payload;
-    console.log("실행?");
+    // TRY API
     const { data } = yield call(authApi.login, loginData);
+    // GET RESPONSE DATA
     const uid = data[0]._id;
     const email = data[0].email;
     const nickname = data[0].nickname;
-
-    // 로그인 성공 함수 실행
+    // DISPATCH LOGIN SUCCESS
     yield put({
       type: AuthTypes.LOGIN_SUCCESS,
       payload: {
@@ -26,14 +27,12 @@ function* login$(action: LoginAction) {
         uid,
       },
     });
-
-    // 세션에 uid 등록
-    yield window.sessionStorage.setItem("user", uid);
   } catch {
-    // 로그인 실패 함수 실행
+    // IF GET ERROR
+    // DISPATCH LOGIN FAILURE
     yield put({
       type: AuthTypes.LOGIN_FAILURE,
-      payload: "계정 또는 비밀번호를 다시 확인해주세요.",
+      payload: "Please Check your Email & Password.",
     });
   }
 }

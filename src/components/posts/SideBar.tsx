@@ -7,6 +7,7 @@ import { AuthActions } from "../../actions/auth";
 import { useSelector } from "react-redux";
 import { RootState } from "../../reducers";
 
+/* STYLE */
 const SideMenu = styled(DropdownButton)`
   margin: 3px;
   position: absolute;
@@ -32,9 +33,10 @@ const SideMenu = styled(DropdownButton)`
 `;
 
 const SideBar = () => {
+  /* REDUX */
   const dispatch = useDispatch();
   const authState = useSelector((state: RootState) => state.auth);
-
+  /* LOGOUT */
   const logout = () => {
     dispatch(AuthActions.logout());
     alert("로그아웃 했습니다.");

@@ -7,6 +7,7 @@ import { RootState } from "../reducers";
 import { useSelector, useDispatch } from "react-redux";
 import { signup } from "../apis/auth";
 
+/* STYLE */
 const SignupWrapper = styled(Container)`
   padding: 0;
   background-image: url("./images/13.jpg");
@@ -65,6 +66,11 @@ const SignupForm = styled(Form)`
   }
 `;
 
+const ErrMsg = styled.span`
+  color: red;
+  font-weight: bold;
+`;
+
 const ButtonWrapper = styled(Container)`
   margin: 0;
   padding: 0;
@@ -74,25 +80,27 @@ const ButtonWrapper = styled(Container)`
   margin-bottom: 30px;
 `;
 
-const SignupContainer = ({ history }: any) => {
+const SignupContainer = ({ props }: any) => {
+  /* REDUX */
   const disaptch = useDispatch();
   const authState = useSelector((state: RootState) => state.auth);
-
+  /* USESTATE */
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [checkPassword, setCheckPassword] = useState("");
   const [nickname, setNickname] = useState("");
-
+  const [emailMsg, setEmailMsg] = useState("");
+  const [passwordMsg, setPasswordMsg] = useState("");
+  const [checkPasswordMsg, setCheckPasswordMsg] = useState("");
+  const [nicknameMsg, setNicknameMsg] = useState("");
+  const [errMsg, setErrMsg] = useState("");
+  /* INIT SETTING */
   useEffect(() => {
-    // Store의 AUTH 정보 출력
-    console.log(authState);
-
     if (authState.uid !== undefined) {
-      alert("로그인 되어 있는 상태입니다.");
-      history.push("/");
+      props.history.push("/");
     }
   }, [authState]);
-
+  /* UPDATE TEXT */
   const updateEmail = (event: any) => {
     setEmail(event.target.value);
   };
@@ -105,24 +113,42 @@ const SignupContainer = ({ history }: any) => {
   const updateNickname = (event: any) => {
     setNickname(event.target.value);
   };
-
+  /* SUBMIT */
   const submit = async (event: any) => {
     event.preventDefault();
-    console.log(email, password, nickname);
-    if (email === "" || password === "" || nickname === "") {
-      alert("텍스트를 입력해주세요.");
-    } else if (password === checkPassword) {
-      const result = await signup({ email, password, nickname });
-      if (result === 1) {
-        alert("회원가입 되었습니다.");
-        await history.replace("/login");
-      } else if (result === 0) {
-        alert("이미 존재하는 회원정보입니다.");
-      } else {
-        alert("회원가입에 실패했습니다.");
-      }
+    if (email.replaceAll(" ", "").length === 0) {
+      setEmailMsg("이메일을 입력해주세요.");
+      return;
     } else {
-      alert("비밀번호가 다릅니다..");
+      setEmailMsg("");
+    }
+    if (password.replaceAll(" ", "").length === 0) {
+      setPasswordMsg("비밀번호를 입력해주세요.");
+      return;
+    } else {
+      setPasswordMsg("");
+    }
+    if (password !== checkPassword) {
+      setCheckPasswordMsg("비밀번호가 다릅니다.");
+      return;
+    } else {
+      setCheckPasswordMsg("");
+    }
+    if (nickname.replaceAll(" ", "").length === 0) {
+      setNicknameMsg("닉네임을 입력해주세요.");
+      return;
+    } else {
+      setNickname("");
+    }
+
+    const result = await signup({ email, password, nickname });
+    if (result === 1) {
+      alert("회원가입 되었습니다.");
+      await props.history.replace("/login");
+    } else if (result === 0) {
+      setErrMsg("이미 존재하는 회원정보입니다.");
+    } else {
+      setErrMsg("데이터베이스 오류가 발생했습니다.");
     }
   };
 
@@ -140,6 +166,8 @@ const SignupContainer = ({ history }: any) => {
           />
           <Form.Text className="text-muted">
             We'll never share your email with anyone else
+            <br />
+            {emailMsg === "" ? <></> : <ErrMsg>{emailMsg}</ErrMsg>}
           </Form.Text>
         </Form.Group>
 
@@ -151,6 +179,7 @@ const SignupContainer = ({ history }: any) => {
             value={password}
             onChange={updatePassword}
           />
+          {passwordMsg === "" ? <></> : <ErrMsg>{passwordMsg}</ErrMsg>}
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicCheckPassword">
           <Form.Label>Check Password</Form.Label>
@@ -160,6 +189,11 @@ const SignupContainer = ({ history }: any) => {
             value={checkPassword}
             onChange={updateCheckPassword}
           />
+          {checkPasswordMsg === "" ? (
+            <></>
+          ) : (
+            <ErrMsg>{checkPasswordMsg}</ErrMsg>
+          )}
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formBasicNickname">
@@ -170,14 +204,16 @@ const SignupContainer = ({ history }: any) => {
             value={nickname}
             onChange={updateNickname}
           />
+          {nicknameMsg === "" ? <></> : <ErrMsg>{nicknameMsg}</ErrMsg>}
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formBasicCheckbox">
           <Form.Check type="checkbox" label="Check me out" />
         </Form.Group>
 
+        {errMsg === "" ? <></> : <ErrMsg>{errMsg}</ErrMsg>}
         <ButtonWrapper>
-          <Button variant="dark" onClick={() => history.goBack()}>
+          <Button variant="dark" onClick={() => props.history.goBack()}>
             Back
           </Button>
           <Button variant="primary" type="submit">

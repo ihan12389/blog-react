@@ -1,5 +1,6 @@
 import { AuthTypes, AuthActionTypes } from "../../actions/auth";
 
+/* AUTH STATE INTERFACE */
 export interface AuthState {
   uid: string | undefined;
   email: string | undefined;
@@ -8,7 +9,7 @@ export interface AuthState {
   loginFailureMsg: string;
 }
 
-// Auth의 Store 데이터
+/* AUTH STORE INITIAL STATE */
 const initialState: AuthState = {
   uid: undefined,
   email: undefined,
@@ -17,17 +18,15 @@ const initialState: AuthState = {
   loginFailureMsg: "",
 };
 
-// Auth Saga Redux의 Reducer
+/* AUTH REDUCER */
 const authReducer = (state = initialState, action: AuthActionTypes) => {
   switch (action.type) {
-    // 로그인 요청
-    case AuthTypes.LOGIN_REQUEST:
+    case AuthTypes.LOGIN_REQUEST: // 로그인 요청
       return {
         ...state,
         loggingIn: true,
       };
-    // 로그인 성공
-    case AuthTypes.LOGIN_SUCCESS:
+    case AuthTypes.LOGIN_SUCCESS: // 로그인 성공
       return {
         ...state,
         loggingIn: false,
@@ -35,20 +34,18 @@ const authReducer = (state = initialState, action: AuthActionTypes) => {
         email: action.payload.email,
         nickname: action.payload.nickname,
       };
-    // 로그인 실패
-    case AuthTypes.LOGIN_FAILURE:
+    case AuthTypes.LOGIN_FAILURE: // 로그인 실패
       return {
         ...state,
         loggingIn: false,
         loginFailureMsg: action.payload,
       };
-    // 오류 메세지 변경
-    case AuthTypes.CHANGE_MESSAGE:
+    case AuthTypes.CHANGE_MESSAGE: // 메세지 변경
       return {
         ...state,
         loginFailureMsg: action.payload,
       };
-    case AuthTypes.LOGOUT:
+    case AuthTypes.LOGOUT: // 로그아웃
       return {
         ...state,
         email: undefined,

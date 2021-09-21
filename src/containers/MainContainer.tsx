@@ -5,6 +5,7 @@ import Header from "../components/main/Header";
 import HeaderSearch from "../components/search/HeaderSearch";
 import Main from "../components/main/Main";
 
+/* STYLE */
 const TopContainer = styled(Container)`
   height: 100%;
   padding: 0;

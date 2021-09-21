@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Container } from "react-bootstrap";
 import "../../style/fonts.css";
 
+/* STYLE */
 const HeaderContainer = styled(Container)`
   width: 100%;
   height: 100%;

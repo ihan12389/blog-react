@@ -5,6 +5,7 @@ import PostsHeader from "../components/posts/PostsHeader";
 import PostsContent from "../components/posts/PostsContent";
 import SideBar from "../components/posts/SideBar";
 
+/* STYLE */
 const ContainerPosts = styled(Container)`
   height: 100%;
   padding: 0;

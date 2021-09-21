@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Container, Row, Button } from "react-bootstrap";
 import { ImArrowLeft, ImArrowRight } from "react-icons/im";
 import { IoReturnDownBackSharp } from "react-icons/io5";
+import { useSelector } from "react-redux";
+import { RootState } from "../../reducers";
 
+/* STYLE */
 const ShowContainer = styled(Container)`
   width: 100%;
   padding: 0;
@@ -182,7 +185,6 @@ const PostInformRow = styled(Row)`
 `;
 
 const Content = styled(Container)`
-  background-color: tomato;
   margin: 0 30px;
   padding: 0;
 `;
@@ -199,10 +201,28 @@ const BackButton = styled(Button)`
 
 const Viewer = styled.div`
   min-height: 40px;
-  border: 1px solid #dddddd;
+  padding: 20px;
 `;
 
-const ShowContent = ({ content, a }: any) => {
+const ShowContent = (props: any) => {
+  /* REDUX */
+  const postState = useSelector((state: RootState) => state.post);
+  /* USESTATE */
+  const [title, setTitle] = useState("");
+  const [writer, setWriter] = useState("");
+  const [likes, setLikes] = useState(0);
+  const [date, setDate] = useState("");
+  const [contentDom, setContent] = useState("");
+  /* INIT SETTING */
+  useEffect(() => {
+    console.log(postState);
+    if (postState.title !== "") setTitle(postState.title);
+    if (postState.nickname !== "") setWriter(postState.nickname);
+    if (postState.date !== "") setDate(postState.date);
+    if (postState.likes !== 0) setLikes(postState.likes);
+    if (postState.content !== "") setContent(postState.content);
+  }, [postState]);
+
   return (
     <ShowContainer>
       <HandleBarRow xs="3">
@@ -212,18 +232,19 @@ const ShowContent = ({ content, a }: any) => {
       </HandleBarRow>
       <PostInformRow xs="5">
         <span className="postNum">13</span>
-        <span className="writer">Lihano</span>
-        <span className="title">Posting Title</span>
-        <span className="likes">12</span>
-        <span className="time">21/09/14 12:49</span>
+        <span className="writer">{writer}</span>
+        <span className="title">{title}</span>
+        <span className="likes">{likes}</span>
+        <span className="time">{date}</span>
       </PostInformRow>
       <Content>
         <Viewer
           className="ck-content"
-          dangerouslySetInnerHTML={{ __html: content }}
+          dangerouslySetInnerHTML={{ __html: contentDom }}
+          id="viewer"
         ></Viewer>
       </Content>
-      <BackButton variant="outline-dark" onClick={() => a.goBack()}>
+      <BackButton variant="outline-dark" onClick={() => props.a.goBack()}>
         <IoReturnDownBackSharp />
       </BackButton>
     </ShowContainer>

@@ -1,34 +1,32 @@
 import axios from "axios";
 
-// 회원가입 리퀘스트 객체 데이터 인터페이스
+/* API REQUEST DTO INTERFACE */
 interface SignupRequestDto {
   email: string;
   password: string;
   nickname: string;
 }
-
-// 회원가입 데이터 인터페이스
+/* API FUNCTION PROPS LOGIN DATA INTERFACE */
 interface SignupData {
   email: string;
   password: string;
   nickname: string;
 }
-
+/* API FUNCTION PROPS SIGNUP DATA INTERFACE */
 interface LoginData {
   email: string;
   password: string;
 }
-
-// 회원 가입 요청
+/* SIGNUP API FUNCTION */
 export const signup = async (signupData: SignupData) => {
+  // GET REQUEST DTO
   var result = -1;
   const request: SignupRequestDto = {
     email: signupData.email,
     password: signupData.password,
     nickname: signupData.nickname,
   };
-  console.log(request);
-
+  // GET RESPONSE'S RESULT
   await axios
     .post("http://localhost:8080/api/signup", request)
     .then((res) => {
@@ -37,21 +35,20 @@ export const signup = async (signupData: SignupData) => {
     .catch((err) => {
       console.log(err);
     });
+  /* RETURN */
   return result;
 };
-
-// 로그인 요청
+/* LOGIN API FUNCTION */
 export const login = async (loginData: LoginData) => {
+  // GET REQUEST
   const request = {
     email: loginData.email,
     password: loginData.password,
   };
-  console.log(request);
-
+  // GET RESPONSE
   const response = await axios
     .post(`http://localhost:8080/api/login`, request)
     .catch((err) => console.log(err));
-
-  console.log(response);
+  // RETURN
   return response;
 };
