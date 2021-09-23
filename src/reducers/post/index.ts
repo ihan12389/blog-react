@@ -9,6 +9,7 @@ export interface PostState {
   nickname: string;
   date: string;
   likes: number;
+  previewImg: string;
   errMsg: string;
 }
 
@@ -21,11 +22,12 @@ const initialState: PostState = {
   nickname: "",
   date: "",
   likes: 0,
+  previewImg: "",
   errMsg: "",
 };
 
 /* POST REDUCER */
-const authReducer = (state = initialState, action: PostActionTypes) => {
+const postReducer = (state = initialState, action: PostActionTypes) => {
   switch (action.type) {
     case PostTypes.WRITE_REQUEST: // 포스트 쓰기 요청
       return state;
@@ -70,4 +72,4 @@ const authReducer = (state = initialState, action: PostActionTypes) => {
   }
 };
 
-export default authReducer;
+export default postReducer;

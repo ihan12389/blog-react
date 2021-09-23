@@ -94,9 +94,8 @@ const WriteForm = (props: any) => {
     if (indexOfStart === -1) {
       imgSrc = "";
     } else {
-      imgSrc = content.substring(indexOfStart + 5, indexOfLast);
+      imgSrc = content.substring(indexOfStart + 5, indexOfLast - 1);
     }
-
     /* DISPATCH */
     await dispatch(
       PostActions.write({

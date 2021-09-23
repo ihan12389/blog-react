@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { Container, Row } from "react-bootstrap";
 import PostsHeader from "../components/posts/PostsHeader";
 import PostsContent from "../components/posts/PostsContent";
 import SideBar from "../components/posts/SideBar";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "../reducers";
+import { PostsActions } from "../actions/posts";
 
 /* STYLE */
 const ContainerPosts = styled(Container)`
@@ -21,6 +24,15 @@ const SecondRow = styled(Row)`
 `;
 
 const PostsContainer = () => {
+  /* REDUX */
+  const postsState = useSelector((state: RootState) => state.posts);
+  const dispatch = useDispatch();
+  /* INIT SETTING */
+  useEffect(() => {
+    console.log("posts", postsState);
+    dispatch(PostsActions.read());
+  }, []);
+
   return (
     <ContainerPosts fluid>
       <SideBar />
@@ -28,7 +40,7 @@ const PostsContainer = () => {
         <PostsHeader />
       </FirstRow>
       <SecondRow>
-        <PostsContent />
+        <PostsContent posts={postsState} />
       </SecondRow>
     </ContainerPosts>
   );

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { Container, Row, Image, Button } from "react-bootstrap";
 import "../../style/fonts.css";
@@ -17,7 +17,13 @@ const ContentContainer = styled(Container)`
   margin-top: 100px;
 `;
 
-const LeftItemRow = styled(Row)`
+const LinkComponent = styled(Link)`
+  color: black;
+  text-decoration: none;
+  text-decoration-line: none;
+`;
+
+const ItemRow = styled(Row)`
   padding: 0;
   margin: 0;
   display: flex;
@@ -66,8 +72,12 @@ const TextContent = styled.span`
   overflow: hidden;
   height: 100%;
   font-family: "Noto Sans KR", sans-serif;
-  font-size: 18px;
+  font-size: 22px;
   line-height: 1.8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
   @media (max-width: 760px) {
     width: 240px;
     font-size: 14px;
@@ -121,6 +131,9 @@ const Time = styled.div`
   justify-content: center;
   align-items: center;
   font-family: "Noto Sans JP", sans-serif;
+  span {
+    text-align: center;
+  }
 
   @media (max-width: 760px) {
     display: none;
@@ -150,6 +163,9 @@ const Time_Right = styled.div`
   justify-content: center;
   align-items: center;
   font-family: "Noto Sans JP", sans-serif;
+  span {
+    text-align: center;
+  }
 
   @media (max-width: 760px) {
     display: none;
@@ -194,100 +210,60 @@ const WriteButton = styled(Button)`
   }
 `;
 
-const PostsContent = () => {
+const PostsContent = (props: any) => {
   /* REDUX */
   const authState = useSelector((state: RootState) => state.auth);
+  const postsState = useSelector((state: RootState) => state.posts);
+
+  /* INIT SET */
+  useEffect(() => {
+    console.log(postsState);
+  }, [postsState]);
+
   return (
     <ContentContainer>
       <PostsSearch />
+      {/* MAPPING POSTS LIST */}
+      {postsState.length >= 1 ? (
+        postsState.map((post: any, idx) => {
+          return (
+            <>
+              {idx % 2 === 0 ? (
+                <>
+                  <LinkComponent to={`/show/${post._id}`}>
+                    <ItemRow xs={4}>
+                      <PreviewImage src={post.previewImg} />
+                      <TextContent>{post.title}</TextContent>
+                      <Writer>{post.nickname}</Writer>
+                      <Time>
+                        <span>{post.date}</span>
+                      </Time>
+                    </ItemRow>
+                  </LinkComponent>
+                  <Border />
+                </>
+              ) : (
+                <>
+                  <LinkComponent to={`/show/${post._id}`}>
+                    <ItemRow xs={4}>
+                      <Time_Right>
+                        <span>{post.date}</span>
+                      </Time_Right>
+                      <Writer>{post.nickname}</Writer>
+                      <TextContent>{post.title}</TextContent>
+                      <PreviewImage src={post.previewImg} />
+                    </ItemRow>
+                  </LinkComponent>
+                  <Border />
+                </>
+              )}
+            </>
+          );
+        })
+      ) : (
+        <></>
+      )}
 
-      <LeftItemRow xs={4}>
-        <PreviewImage src="./images/15.jpg" />
-        <TextContent>
-          안녕하세요. 저는 이한입니다. 만나서 반가워요. 여러분들은 잘 지내고
-          계시나요? 잘 지내고 계신다니 너무 다행이네요. 오늘 제가 드리고 싶은
-          말씀은 블라블라블라
-        </TextContent>
-        <Writer>LIHANO</Writer>
-        <Time>
-          <span className="Month">21-09-13</span>
-          <span className="Hour">12 : 41</span>
-        </Time>
-      </LeftItemRow>
-      <Border />
-      <LeftItemRow xs={4}>
-        <Time_Right>
-          <span className="Month">21-09-13</span>
-          <span className="Hour">12 : 41</span>
-        </Time_Right>
-        <Writer>LIHANO</Writer>
-        <TextContent>
-          안녕하세요. 저는 이한입니다. 만나서 반가워요. 여러분들은 잘 지내고
-          계시나요? 잘 지내고 계신다니 너무 다행이네요. 오늘 제가 드리고 싶은
-          말씀은 블라블라블라
-        </TextContent>
-        <PreviewImage src="./images/16.jpg" />
-      </LeftItemRow>
-      <Border />
-
-      <LeftItemRow xs={4}>
-        <PreviewImage src="./images/17.jpg" />
-        <TextContent>
-          안녕하세요. 저는 이한입니다. 만나서 반가워요. 여러분들은 잘 지내고
-          계시나요? 잘 지내고 계신다니 너무 다행이네요. 오늘 제가 드리고 싶은
-          말씀은 블라블라블라
-        </TextContent>
-        <Writer>LIHANO</Writer>
-        <Time>
-          <span className="Month">21-09-13</span>
-          <span className="Hour">12 : 41</span>
-        </Time>
-      </LeftItemRow>
-      <Border />
-
-      <LeftItemRow xs={4}>
-        <Time_Right>
-          <span className="Month">21-09-13</span>
-          <span className="Hour">12 : 41</span>
-        </Time_Right>
-        <Writer>LIHANO</Writer>
-        <TextContent>
-          안녕하세요. 저는 이한입니다. 만나서 반가워요. 여러분들은 잘 지내고
-          계시나요? 잘 지내고 계신다니 너무 다행이네요. 오늘 제가 드리고 싶은
-          말씀은 블라블라블라
-        </TextContent>
-        <PreviewImage src="./images/18.jpg" />
-      </LeftItemRow>
-      <Border />
-
-      <LeftItemRow xs={4}>
-        <PreviewImage src="./images/19.jpg" />
-        <TextContent>
-          안녕하세요. 저는 이한입니다. 만나서 반가워요. 여러분들은 잘 지내고
-          계시나요? 잘 지내고 계신다니 너무 다행이네요. 오늘 제가 드리고 싶은
-          말씀은 블라블라블라
-        </TextContent>
-        <Writer>LIHANO</Writer>
-        <Time>
-          <span className="Month">21-09-13</span>
-          <span className="Hour">12 : 41</span>
-        </Time>
-      </LeftItemRow>
-      <Border />
-
-      <LeftItemRow xs={4}>
-        <Time_Right>
-          <span className="Month">21-09-13</span>
-          <span className="Hour">12 : 41</span>
-        </Time_Right>
-        <Writer>LIHANO</Writer>
-        <TextContent>
-          안녕하세요. 저는 이한입니다. 만나서 반가워요. 여러분들은 잘 지내고
-          계시나요? 잘 지내고 계신다니 너무 다행이네요. 오늘 제가 드리고 싶은
-          말씀은 블라블라블라
-        </TextContent>
-        <PreviewImage src="./images/20.jpg" />
-      </LeftItemRow>
       {authState.uid !== undefined ? (
         <Link to="/write">
           <WriteButton variant="outline-secondary">Write</WriteButton>
