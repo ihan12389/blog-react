@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Container, Row } from "react-bootstrap";
 import ShowHeader from "../components/show/ShowHeader";
@@ -32,13 +32,16 @@ const SecondRow = styled(Row)`
 `;
 
 const ShowContainer = (props: any) => {
+  /* USE STATE */
+  const [idx, setIdx] = useState(0);
   /* REDUX */
   const dispatch = useDispatch();
   /* INIT SETTING */
   useEffect(() => {
     const postId = props.match.params.postId;
+    setIdx(props.location.state.idx);
     dispatch(PostActions.read(postId));
-  }, []);
+  }, [props.match.params.postId]);
 
   return (
     <ContainerShow>
@@ -47,7 +50,7 @@ const ShowContainer = (props: any) => {
         <ShowHeader />
       </FirstRow>
       <SecondRow>
-        <ShowContent a={props.history} />
+        <ShowContent idx={idx} />
       </SecondRow>
     </ContainerShow>
   );

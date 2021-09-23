@@ -5,6 +5,7 @@ import { ImArrowLeft, ImArrowRight } from "react-icons/im";
 import { IoReturnDownBackSharp } from "react-icons/io5";
 import { useSelector } from "react-redux";
 import { RootState } from "../../reducers";
+import { useHistory } from "react-router";
 
 /* STYLE */
 const ShowContainer = styled(Container)`
@@ -205,8 +206,11 @@ const Viewer = styled.div`
 `;
 
 const ShowContent = (props: any) => {
+  /* MAKE HISTORY */
+  const history = useHistory();
   /* REDUX */
   const postState = useSelector((state: RootState) => state.post);
+  const postsState = useSelector((state: RootState) => state.posts);
   /* USESTATE */
   const [title, setTitle] = useState("");
   const [writer, setWriter] = useState("");
@@ -215,23 +219,50 @@ const ShowContent = (props: any) => {
   const [contentDom, setContent] = useState("");
   /* INIT SETTING */
   useEffect(() => {
-    console.log(postState);
     if (postState.title !== "") setTitle(postState.title);
     if (postState.nickname !== "") setWriter(postState.nickname);
     if (postState.date !== "") setDate(postState.date);
     if (postState.likes !== 0) setLikes(postState.likes);
     if (postState.content !== "") setContent(postState.content);
   }, [postState]);
+  /* GO TO BACK POST */
+  const goBackPost = (event: any) => {
+    if (props.idx === 0) {
+      alert("이전 포스트가 없습니다.");
+    } else {
+      console.log(postsState[props.idx - 1]);
+      history.push({
+        pathname: `/show/${postsState[props.idx - 1]._id}`,
+        state: {
+          idx: props.idx - 1,
+        },
+      });
+    }
+  };
+  /* GO TO FRONT POST */
+  const goFrontPost = (event: any) => {
+    if (props.idx === postsState.length - 1) {
+      alert("더 이상 포스트가 없습니다.");
+    } else {
+      console.log(postsState[props.idx + 1]);
+      history.push({
+        pathname: `/show/${postsState[props.idx + 1]._id}`,
+        state: {
+          idx: props.idx + 1,
+        },
+      });
+    }
+  };
 
   return (
     <ShowContainer>
       <HandleBarRow xs="3">
-        <ImArrowLeft />
+        <ImArrowLeft onClick={goBackPost} />
         <h2>The Posting Title</h2>
-        <ImArrowRight />
+        <ImArrowRight onClick={goFrontPost} />
       </HandleBarRow>
       <PostInformRow xs="5">
-        <span className="postNum">13</span>
+        <span className="postNum">{props.idx}</span>
         <span className="writer">{writer}</span>
         <span className="title">{title}</span>
         <span className="likes">{likes}</span>
@@ -244,7 +275,7 @@ const ShowContent = (props: any) => {
           id="viewer"
         ></Viewer>
       </Content>
-      <BackButton variant="outline-dark" onClick={() => props.a.goBack()}>
+      <BackButton variant="outline-dark" onClick={() => history.push("/posts")}>
         <IoReturnDownBackSharp />
       </BackButton>
     </ShowContainer>

@@ -15,7 +15,7 @@ export interface ReadSuccessAction {
   type: PostsTypes.READ_SUCCESS;
   payload: [
     {
-      postId: string;
+      _id: string;
       title: string;
       nickname: string;
       date: string;

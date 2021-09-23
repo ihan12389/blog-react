@@ -6,13 +6,13 @@ export interface PostsState {
   date: string;
   title: string;
   previewImg: string;
-  postId: string;
+  _id: string;
 }
 
 /* POSTS STORE INITIAL STATE */
 const initialState: Array<PostsState> = [
   {
-    postId: "",
+    _id: "",
     title: "",
     nickname: "",
     date: "",

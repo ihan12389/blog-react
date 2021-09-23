@@ -230,7 +230,14 @@ const PostsContent = (props: any) => {
             <>
               {idx % 2 === 0 ? (
                 <>
-                  <LinkComponent to={`/show/${post._id}`}>
+                  <LinkComponent
+                    to={{
+                      pathname: `/show/${post._id}`,
+                      state: {
+                        idx: idx,
+                      },
+                    }}
+                  >
                     <ItemRow xs={4}>
                       <PreviewImage src={post.previewImg} />
                       <TextContent>{post.title}</TextContent>
@@ -244,7 +251,14 @@ const PostsContent = (props: any) => {
                 </>
               ) : (
                 <>
-                  <LinkComponent to={`/show/${post._id}`}>
+                  <LinkComponent
+                    to={{
+                      pathname: `/show/${post._id}`,
+                      state: {
+                        idx: idx,
+                      },
+                    }}
+                  >
                     <ItemRow xs={4}>
                       <Time_Right>
                         <span>{post.date}</span>
