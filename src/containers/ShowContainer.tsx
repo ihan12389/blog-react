@@ -42,6 +42,7 @@ const ShowContainer = (props: any) => {
   /* INIT SETTING */
   useEffect(() => {
     const postId = props.match.params.postId;
+    
     if (props.location.state) {
       console.log(postsState);
       setIdx(props.location.state.idx);

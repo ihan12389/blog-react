@@ -13,7 +13,6 @@ const Router = () => {
     <BrowserRouter>
       <Switch>
         <Route path="/" exact component={MainContainer}></Route>
-        <Route path="/posts" component={PostsContainer}></Route>
         <Route path="/posts/:page" component={PostsContainer}></Route>
         <Route path="/show/:postId" component={ShowContainer}></Route>
         <Route path="/write" component={WriteContainer}></Route>

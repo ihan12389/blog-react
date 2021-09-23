@@ -275,7 +275,12 @@ const ShowContent = (props: any) => {
           id="viewer"
         ></Viewer>
       </Content>
-      <BackButton variant="outline-dark" onClick={() => history.push("/posts")}>
+      <BackButton
+        variant="outline-dark"
+        onClick={() =>
+          history.push(`/posts/${Math.floor(parseInt(props.idx) / 6) + 1}`)
+        }
+      >
         <IoReturnDownBackSharp />
       </BackButton>
     </ShowContainer>

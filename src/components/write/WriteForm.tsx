@@ -95,7 +95,9 @@ const WriteForm = (props: any) => {
       imgSrc = "";
     } else {
       imgSrc = content.substring(indexOfStart + 5, indexOfLast - 1);
+      imgSrc = imageToDataUri(imgSrc, 120, 120);
     }
+
     /* DISPATCH */
     await dispatch(
       PostActions.write({
@@ -109,6 +111,26 @@ const WriteForm = (props: any) => {
       })
     );
   };
+
+  /* Resize Img BASE64 for PreviewImg */
+  function imageToDataUri(url: string, width: number, height: number) {
+    // create an off-screen canvas
+    var canvas = document.createElement("canvas"),
+      ctx: any = canvas.getContext("2d");
+
+    var img = document.createElement("img");
+    img.src = url;
+
+    // set its dimension to target size
+    canvas.width = width;
+    canvas.height = height;
+
+    // draw source image into the off-screen canvas:
+    ctx.drawImage(img, 0, 0, width, height);
+
+    // encode image to data-uri with base64 version of compressed image
+    return canvas.toDataURL();
+  }
 
   return (
     <FormWrapper>
