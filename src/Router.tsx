@@ -6,6 +6,7 @@ import ShowContainer from "./containers/ShowContainer";
 import WriteContainer from "./containers/WriteContainer";
 import LoginContainer from "./containers/LoginContainer";
 import SignupContainer from "./containers/SignupContainer";
+import Path from "./path/Path";
 
 const Router = () => {
   return (
@@ -18,6 +19,7 @@ const Router = () => {
         <Route path="/write" component={WriteContainer}></Route>
         <Route path="/login" component={LoginContainer}></Route>
         <Route path="/signup" component={SignupContainer}></Route>
+        <Route path="/path/:postId" component={Path}></Route>
       </Switch>
     </BrowserRouter>
   );

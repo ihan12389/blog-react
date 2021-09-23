@@ -1,5 +1,11 @@
 import { all, put, call, takeLatest } from "redux-saga/effects";
-import { PostTypes, WriteAction, ReadAction } from "../actions/post";
+import {
+  PostTypes,
+  WriteAction,
+  WriteSuccessAction,
+  ReadAction,
+} from "../actions/post";
+import { PostsTypes } from "../actions/posts";
 import * as postApi from "../apis/post";
 
 /* BIND POST SAGA FUNCTIONS */
@@ -7,6 +13,7 @@ export default function* postSaga() {
   yield all([
     takeLatest(PostTypes.WRITE_REQUEST, write$),
     takeLatest(PostTypes.READ_REQUEST, read$),
+    takeLatest(PostTypes.WRITE_SUCCESS, success$),
   ]);
 }
 
@@ -19,13 +26,10 @@ function* write$(action: WriteAction) {
     const { data } = yield call(postApi.write, writeData);
     // GET RESPONSE DATA
     const postId = data.result._id;
-    // IF SUCCESS GO SHOW PAGE
-    // eslint-disable-next-line no-restricted-globals
-    location.href = `/show/${postId}`;
     // DISPATCH WRITE SUCCESS
     yield put({
       type: PostTypes.WRITE_SUCCESS,
-      payload: "성공했습니다.",
+      payload: { message: "성공했습니다.", postId: postId },
     });
   } catch (err) {
     // IF GET ERROR
@@ -35,6 +39,19 @@ function* write$(action: WriteAction) {
       type: PostTypes.WRITE_FAILURE,
       payload: "데이터베이스 오류가 발생했습니다.",
     });
+  }
+}
+
+/* WRITE SUCCRESS TRIGGER SAGA FUNCTION */
+function* success$(action: WriteSuccessAction) {
+  try {
+    // REQUEST POSTS LIST RESET
+    yield put({
+      type: PostsTypes.READ_REQUEST,
+      payload: action.payload.postId,
+    });
+  } catch (err) {
+    console.log(err);
   }
 }
 

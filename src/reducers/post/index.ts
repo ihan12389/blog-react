@@ -34,7 +34,7 @@ const postReducer = (state = initialState, action: PostActionTypes) => {
     case PostTypes.WRITE_SUCCESS: // 포스트 쓰기 성공
       return {
         ...state,
-        errMsg: action.payload,
+        errMsg: action.payload.message,
       };
     case PostTypes.WRITE_FAILURE: // 포스트 쓰기 실패
       return {

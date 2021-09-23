@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Container, Form, Button } from "react-bootstrap";
 import styled from "styled-components";
 import "../style/fonts.css";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { RootState } from "../reducers";
 import { useSelector, useDispatch } from "react-redux";
 import { signup } from "../apis/auth";
@@ -81,6 +81,8 @@ const ButtonWrapper = styled(Container)`
 `;
 
 const SignupContainer = ({ props }: any) => {
+  /* MAKE HISTORY */
+  const history = useHistory();
   /* REDUX */
   const disaptch = useDispatch();
   const authState = useSelector((state: RootState) => state.auth);
@@ -97,7 +99,7 @@ const SignupContainer = ({ props }: any) => {
   /* INIT SETTING */
   useEffect(() => {
     if (authState.uid !== undefined) {
-      props.history.push("/");
+      history.push("/");
     }
   }, [authState]);
   /* UPDATE TEXT */
@@ -144,7 +146,7 @@ const SignupContainer = ({ props }: any) => {
     const result = await signup({ email, password, nickname });
     if (result === 1) {
       alert("회원가입 되었습니다.");
-      await props.history.replace("/login");
+      history.push("/login");
     } else if (result === 0) {
       setErrMsg("이미 존재하는 회원정보입니다.");
     } else {
@@ -153,75 +155,77 @@ const SignupContainer = ({ props }: any) => {
   };
 
   return (
-    <SignupWrapper>
-      <span className="signupTitle">WELCOME! SIGN UP HERE</span>
-      <SignupForm onSubmit={submit}>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>Email Address</Form.Label>
-          <Form.Control
-            type="email"
-            placeholder="Enter Email"
-            value={email}
-            onChange={updateEmail}
-          />
-          <Form.Text className="text-muted">
-            We'll never share your email with anyone else
-            <br />
-            {emailMsg === "" ? <></> : <ErrMsg>{emailMsg}</ErrMsg>}
-          </Form.Text>
-        </Form.Group>
+    <>
+      <SignupWrapper>
+        <span className="signupTitle">WELCOME! SIGN UP HERE</span>
+        <SignupForm onSubmit={submit}>
+          <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Label>Email Address</Form.Label>
+            <Form.Control
+              type="email"
+              placeholder="Enter Email"
+              value={email}
+              onChange={updateEmail}
+            />
+            <Form.Text className="text-muted">
+              We'll never share your email with anyone else
+              <br />
+              {emailMsg === "" ? <></> : <ErrMsg>{emailMsg}</ErrMsg>}
+            </Form.Text>
+          </Form.Group>
 
-        <Form.Group className="mb-3" controlId="formBasicPassword">
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            type="password"
-            placeholder="password"
-            value={password}
-            onChange={updatePassword}
-          />
-          {passwordMsg === "" ? <></> : <ErrMsg>{passwordMsg}</ErrMsg>}
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicCheckPassword">
-          <Form.Label>Check Password</Form.Label>
-          <Form.Control
-            type="password"
-            placeholder="Check password"
-            value={checkPassword}
-            onChange={updateCheckPassword}
-          />
-          {checkPasswordMsg === "" ? (
-            <></>
-          ) : (
-            <ErrMsg>{checkPasswordMsg}</ErrMsg>
-          )}
-        </Form.Group>
+          <Form.Group className="mb-3" controlId="formBasicPassword">
+            <Form.Label>Password</Form.Label>
+            <Form.Control
+              type="password"
+              placeholder="password"
+              value={password}
+              onChange={updatePassword}
+            />
+            {passwordMsg === "" ? <></> : <ErrMsg>{passwordMsg}</ErrMsg>}
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="formBasicCheckPassword">
+            <Form.Label>Check Password</Form.Label>
+            <Form.Control
+              type="password"
+              placeholder="Check password"
+              value={checkPassword}
+              onChange={updateCheckPassword}
+            />
+            {checkPasswordMsg === "" ? (
+              <></>
+            ) : (
+              <ErrMsg>{checkPasswordMsg}</ErrMsg>
+            )}
+          </Form.Group>
 
-        <Form.Group className="mb-3" controlId="formBasicNickname">
-          <Form.Label>Nickname</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="Nickname"
-            value={nickname}
-            onChange={updateNickname}
-          />
-          {nicknameMsg === "" ? <></> : <ErrMsg>{nicknameMsg}</ErrMsg>}
-        </Form.Group>
+          <Form.Group className="mb-3" controlId="formBasicNickname">
+            <Form.Label>Nickname</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Nickname"
+              value={nickname}
+              onChange={updateNickname}
+            />
+            {nicknameMsg === "" ? <></> : <ErrMsg>{nicknameMsg}</ErrMsg>}
+          </Form.Group>
 
-        <Form.Group className="mb-3" controlId="formBasicCheckbox">
-          <Form.Check type="checkbox" label="Check me out" />
-        </Form.Group>
+          <Form.Group className="mb-3" controlId="formBasicCheckbox">
+            <Form.Check type="checkbox" label="Check me out" />
+          </Form.Group>
 
-        {errMsg === "" ? <></> : <ErrMsg>{errMsg}</ErrMsg>}
-        <ButtonWrapper>
-          <Button variant="dark" onClick={() => props.history.goBack()}>
-            Back
-          </Button>
-          <Button variant="primary" type="submit">
-            Submit
-          </Button>
-        </ButtonWrapper>
-      </SignupForm>
-    </SignupWrapper>
+          {errMsg === "" ? <></> : <ErrMsg>{errMsg}</ErrMsg>}
+          <ButtonWrapper>
+            <Button variant="dark" onClick={() => history.goBack()}>
+              Back
+            </Button>
+            <Button variant="primary" type="submit">
+              Submit
+            </Button>
+          </ButtonWrapper>
+        </SignupForm>
+      </SignupWrapper>
+    </>
   );
 };
 

@@ -19,6 +19,11 @@ export interface WriteData {
   likes: number;
 }
 
+export interface WriteSuccessData {
+  message: string;
+  postId: string;
+}
+
 /* WRITE REQUEST ACTION INTERFACE */
 export interface WriteAction {
   type: PostTypes.WRITE_REQUEST;
@@ -28,7 +33,7 @@ export interface WriteAction {
 /* WRITE SUCCESS ACTION INTERFACE */
 export interface WriteSuccessAction {
   type: PostTypes.WRITE_SUCCESS;
-  payload: string;
+  payload: WriteSuccessData;
 }
 
 /* WRITE FAILURE ACTION INTERFACE */

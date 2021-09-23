@@ -4,8 +4,9 @@ import { Container, Row } from "react-bootstrap";
 import ShowHeader from "../components/show/ShowHeader";
 import SideBar from "../components/show/SideBar";
 import ShowContent from "../components/show/ShowContent";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { PostActions } from "../actions/post";
+import { RootState } from "../reducers";
 
 /* STYLE */
 const ContainerShow = styled(Container)`
@@ -34,12 +35,22 @@ const SecondRow = styled(Row)`
 const ShowContainer = (props: any) => {
   /* USE STATE */
   const [idx, setIdx] = useState(0);
+  const postsState = useSelector((state: RootState) => state.posts);
+  console.log("postsState", postsState);
   /* REDUX */
   const dispatch = useDispatch();
   /* INIT SETTING */
   useEffect(() => {
     const postId = props.match.params.postId;
-    setIdx(props.location.state.idx);
+    if (props.location.state) {
+      console.log(postsState);
+      setIdx(props.location.state.idx);
+    } else {
+      console.log(postsState);
+      setIdx(
+        postsState.findIndex((post) => post._id === props.match.params.postId)
+      );
+    }
     dispatch(PostActions.read(postId));
   }, [props.match.params.postId]);
 

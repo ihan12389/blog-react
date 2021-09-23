@@ -258,7 +258,7 @@ const ShowContent = (props: any) => {
     <ShowContainer>
       <HandleBarRow xs="3">
         <ImArrowLeft onClick={goBackPost} />
-        <h2>The Posting Title</h2>
+        <h2>{title}</h2>
         <ImArrowRight onClick={goFrontPost} />
       </HandleBarRow>
       <PostInformRow xs="5">

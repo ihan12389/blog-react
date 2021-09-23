@@ -239,7 +239,13 @@ const PostsContent = (props: any) => {
                     }}
                   >
                     <ItemRow xs={4}>
-                      <PreviewImage src={post.previewImg} />
+                      <PreviewImage
+                        src={
+                          post.previewImg !== ""
+                            ? post.previewImg
+                            : "./images/11.png"
+                        }
+                      />
                       <TextContent>{post.title}</TextContent>
                       <Writer>{post.nickname}</Writer>
                       <Time>
@@ -265,7 +271,13 @@ const PostsContent = (props: any) => {
                       </Time_Right>
                       <Writer>{post.nickname}</Writer>
                       <TextContent>{post.title}</TextContent>
-                      <PreviewImage src={post.previewImg} />
+                      <PreviewImage
+                        src={
+                          post.previewImg !== ""
+                            ? post.previewImg
+                            : "./images/11.png"
+                        }
+                      />
                     </ItemRow>
                   </LinkComponent>
                   <Border />
