@@ -256,33 +256,39 @@ const ShowContent = (props: any) => {
 
   return (
     <ShowContainer>
-      <HandleBarRow xs="3">
-        <ImArrowLeft onClick={goBackPost} />
-        <h2>{title}</h2>
-        <ImArrowRight onClick={goFrontPost} />
-      </HandleBarRow>
-      <PostInformRow xs="5">
-        <span className="postNum">{props.idx}</span>
-        <span className="writer">{writer}</span>
-        <span className="title">{title}</span>
-        <span className="likes">{likes}</span>
-        <span className="time">{date}</span>
-      </PostInformRow>
-      <Content>
-        <Viewer
-          className="ck-content"
-          dangerouslySetInnerHTML={{ __html: contentDom }}
-          id="viewer"
-        ></Viewer>
-      </Content>
-      <BackButton
-        variant="outline-dark"
-        onClick={() =>
-          history.push(`/posts/${Math.floor(parseInt(props.idx) / 6) + 1}`)
-        }
-      >
-        <IoReturnDownBackSharp />
-      </BackButton>
+      {postState.loading ? (
+        <>loading...</>
+      ) : (
+        <>
+          <HandleBarRow xs="3">
+            <ImArrowLeft onClick={goBackPost} />
+            <h2>{title}</h2>
+            <ImArrowRight onClick={goFrontPost} />
+          </HandleBarRow>
+          <PostInformRow xs="5">
+            <span className="postNum">{props.idx}</span>
+            <span className="writer">{writer}</span>
+            <span className="title">{title}</span>
+            <span className="likes">{likes}</span>
+            <span className="time">{date}</span>
+          </PostInformRow>
+          <Content>
+            <Viewer
+              className="ck-content"
+              dangerouslySetInnerHTML={{ __html: contentDom }}
+              id="viewer"
+            ></Viewer>
+          </Content>
+          <BackButton
+            variant="outline-dark"
+            onClick={() =>
+              history.push(`/posts/${Math.floor(parseInt(props.idx) / 6) + 1}`)
+            }
+          >
+            <IoReturnDownBackSharp />
+          </BackButton>
+        </>
+      )}
     </ShowContainer>
   );
 };

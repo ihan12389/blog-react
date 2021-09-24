@@ -1,5 +1,5 @@
 import { all, put, call, takeLatest } from "redux-saga/effects";
-import { PostsTypes, ReadAction, ReadSuccessAction } from "../actions/posts";
+import { PostsTypes, ReadAction } from "../actions/posts";
 import * as postsApi from "../apis/posts";
 
 /* BIND POSTS SAGA FUNCTIONS */
@@ -18,12 +18,6 @@ function* read$(action: ReadAction) {
       type: PostsTypes.READ_SUCCESS,
       payload: data,
     });
-
-    // IF HAVE SOME PATH? GO THIS PAGE
-    if (action.payload !== null) {
-      // eslint-disable-next-line no-restricted-globals
-      location.href = `/path/${action.payload}`;
-    }
   } catch (err) {
     // IF GET ERROR
     console.log(err);

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import { Carousel, Container, Image, Button } from "react-bootstrap";
 import "../../style/fonts.css";
@@ -147,7 +147,7 @@ const Header = () => {
         </AuthContainer>
       ) : (
         <AuthContainer>
-          <Link to="/posts">
+          <Link to="/posts/1">
             <PostButton variant="danger">Go to the Posts Page!</PostButton>
           </Link>
         </AuthContainer>

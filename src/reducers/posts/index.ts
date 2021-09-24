@@ -26,7 +26,6 @@ const postsReducer = (state = initialState, action: PostsActionTypes) => {
     case PostsTypes.READ_REQUEST: // 포스트 리스트 읽기 요청
       return state;
     case PostsTypes.READ_SUCCESS: // 포스트 리스트 읽기 성공
-      console.log("reducer", action.payload);
       return action.payload;
     default:
       return state;

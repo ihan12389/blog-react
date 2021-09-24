@@ -5,7 +5,6 @@ import {
   WriteSuccessAction,
   ReadAction,
 } from "../actions/post";
-import { PostsTypes } from "../actions/posts";
 import * as postApi from "../apis/post";
 
 /* BIND POST SAGA FUNCTIONS */
@@ -43,13 +42,12 @@ function* write$(action: WriteAction) {
 }
 
 /* WRITE SUCCRESS TRIGGER SAGA FUNCTION */
+// eslint-disable-next-line require-yield
 function* success$(action: WriteSuccessAction) {
   try {
-    // REQUEST POSTS LIST RESET
-    yield put({
-      type: PostsTypes.READ_REQUEST,
-      payload: action.payload.postId,
-    });
+    // GO TO PATH PAGE
+    // eslint-disable-next-line no-restricted-globals
+    location.href = `/path/${action.payload.postId}`;
   } catch (err) {
     console.log(err);
   }

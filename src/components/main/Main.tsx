@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { Container, Row, Card, Button } from "react-bootstrap";
+import { Container, Row, Card, Button, Spinner } from "react-bootstrap";
 import "../../style/fonts.css";
 import { Link } from "react-router-dom";
 
@@ -100,61 +100,86 @@ const GoPostsButton = styled(Button)`
   margin-top: 10px;
 `;
 
+const MainSpinner = styled(Spinner)`
+  margin: 150px;
+`;
+
 const Main = () => {
+  /* USE STATE */
+  const [init, setInit] = useState(false);
+  /* INIT SETTING */
+  useEffect(() => {
+    setInit(false);
+    setTimeout(() => {
+      setInit(true);
+    }, 500);
+  }, []);
   return (
-    <MainContainer>
-      <Title>Hello World!!</Title>
-      <Explain>
-        The World is waiting for your News!
-        <br />
-        Find your Enteresting in My Space!
-      </Explain>
-      <GridContainer>
-        <Row xs={1} sm={2}>
-          <div>
-            <MainCard>
-              <Card.Img variant="top" src="./images/12.jpg" />
-              <Card.Body>
-                <Card.Text>Wow! Bootstrap is So Wonderful!</Card.Text>
-                <Card.Title>LEE HAN</Card.Title>
-              </Card.Body>
-            </MainCard>
-          </div>
-          <div>
-            <MainCard>
-              <Card.Img variant="top" src="./images/13.jpg" />
-              <Card.Body>
-                <Card.Text>Wow! Bootstrap is So Wonderful!</Card.Text>
-                <Card.Title>LEE HAN</Card.Title>
-              </Card.Body>
-            </MainCard>
-          </div>
-          <div>
-            <MainCard>
-              <Card.Img variant="top" src="./images/14.jpg" />
-              <Card.Body>
-                <Card.Text>Wow! Bootstrap is So Wonderful!</Card.Text>
-                <Card.Title>LEE HAN</Card.Title>
-              </Card.Body>
-            </MainCard>
-          </div>
-          <div>
-            <MainCard>
-              <Card.Img variant="top" src="./images/15.jpg" />
-              <Card.Body>
-                <Card.Text>Wow! Bootstrap is So Wonderful!</Card.Text>
-                <Card.Title>LEE HAN</Card.Title>
-              </Card.Body>
-            </MainCard>
-          </div>
-        </Row>
-      </GridContainer>
-      <Link to="posts">
-        <GoPostsButton variant="secondary" size="lg">
-          Show More Posts!
-        </GoPostsButton>
-      </Link>
-    </MainContainer>
+    <>
+      {init ? (
+        <>
+          <MainContainer>
+            <Title>Hello World!!</Title>
+            <Explain>
+              The World is waiting for your News!
+              <br />
+              Find your Enteresting in My Space!
+            </Explain>
+            <GridContainer>
+              <Row xs={1} sm={2}>
+                <div>
+                  <MainCard aria-hidden="true">
+                    <Card.Img variant="top" src="./images/12.jpg" />
+                    <Card.Body>
+                      <Card.Text>Wow! Bootstrap is So Wonderful!</Card.Text>
+                      <Card.Title>LEE HAN</Card.Title>
+                    </Card.Body>
+                  </MainCard>
+                </div>
+                <div>
+                  <MainCard>
+                    <Card.Img variant="top" src="./images/13.jpg" />
+                    <Card.Body>
+                      <Card.Text>Wow! Bootstrap is So Wonderful!</Card.Text>
+                      <Card.Title>LEE HAN</Card.Title>
+                    </Card.Body>
+                  </MainCard>
+                </div>
+                <div>
+                  <MainCard>
+                    <Card.Img variant="top" src="./images/14.jpg" />
+                    <Card.Body>
+                      <Card.Text>Wow! Bootstrap is So Wonderful!</Card.Text>
+                      <Card.Title>LEE HAN</Card.Title>
+                    </Card.Body>
+                  </MainCard>
+                </div>
+                <div>
+                  <MainCard>
+                    <Card.Img variant="top" src="./images/15.jpg" />
+                    <Card.Body>
+                      <Card.Text>Wow! Bootstrap is So Wonderful!</Card.Text>
+                      <Card.Title>LEE HAN</Card.Title>
+                    </Card.Body>
+                  </MainCard>
+                </div>
+              </Row>
+            </GridContainer>
+            <Link to="/posts/1">
+              <GoPostsButton variant="secondary" size="lg">
+                Show More Posts!
+              </GoPostsButton>
+            </Link>
+          </MainContainer>
+        </>
+      ) : (
+        <>
+          <MainSpinner animation="border" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </MainSpinner>
+        </>
+      )}
+    </>
   );
 };
 

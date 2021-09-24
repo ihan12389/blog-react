@@ -7,7 +7,7 @@ export enum PostsTypes {
 /* READ REQUEST ACTION INTERFACE */
 export interface ReadAction {
   type: PostsTypes.READ_REQUEST;
-  payload: string | null;
+  payload: null;
 }
 
 /* READ SUCCESS ACTION INTERFACE */

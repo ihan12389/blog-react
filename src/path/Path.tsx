@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Redirect, useHistory } from "react-router";
+import { useHistory } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../reducers";
 import { PostsActions } from "../actions/posts";

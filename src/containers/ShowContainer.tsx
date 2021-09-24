@@ -35,14 +35,13 @@ const SecondRow = styled(Row)`
 const ShowContainer = (props: any) => {
   /* USE STATE */
   const [idx, setIdx] = useState(0);
-  const postsState = useSelector((state: RootState) => state.posts);
-  console.log("postsState", postsState);
   /* REDUX */
+  const postsState = useSelector((state: RootState) => state.posts);
   const dispatch = useDispatch();
   /* INIT SETTING */
   useEffect(() => {
     const postId = props.match.params.postId;
-    
+
     if (props.location.state) {
       console.log(postsState);
       setIdx(props.location.state.idx);
@@ -56,15 +55,17 @@ const ShowContainer = (props: any) => {
   }, [props.match.params.postId]);
 
   return (
-    <ContainerShow>
-      <SideBar />
-      <FirstRow>
-        <ShowHeader />
-      </FirstRow>
-      <SecondRow>
-        <ShowContent idx={idx} />
-      </SecondRow>
-    </ContainerShow>
+    <>
+      <ContainerShow>
+        <SideBar />
+        <FirstRow>
+          <ShowHeader />
+        </FirstRow>
+        <SecondRow>
+          <ShowContent idx={idx} />
+        </SecondRow>
+      </ContainerShow>
+    </>
   );
 };
 
