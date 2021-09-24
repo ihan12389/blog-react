@@ -4,7 +4,9 @@ import {
   WriteAction,
   WriteSuccessAction,
   ReadAction,
+  DeleteAction,
 } from "../actions/post";
+import { PostsTypes } from "../actions/posts";
 import * as postApi from "../apis/post";
 
 /* BIND POST SAGA FUNCTIONS */
@@ -13,6 +15,7 @@ export default function* postSaga() {
     takeLatest(PostTypes.WRITE_REQUEST, write$),
     takeLatest(PostTypes.READ_REQUEST, read$),
     takeLatest(PostTypes.WRITE_SUCCESS, success$),
+    takeLatest(PostTypes.DELETE_REQUEST, delete$),
   ]);
 }
 
@@ -93,5 +96,33 @@ function* read$(action: ReadAction) {
     alert("게시물을 찾을 수가 없습니다.");
     // eslint-disable-next-line no-restricted-globals
     location.href = "/";
+  }
+}
+
+/* DELETE REQUEST TRIGGER SAGA FUNCTION */
+function* delete$(action: DeleteAction) {
+  try {
+    // GET REQUEST DATA
+    const id = action.payload;
+    // TRY API
+    const { data } = yield call(postApi.postdelete, id);
+    console.log(data);
+    //IF SUCCESS
+    yield put({
+      type: PostTypes.DELETE_SUCCESS,
+      payload: null,
+    });
+    // IF DELETE SUCCESSFULLY, RE LOAD POSTS LIST
+    yield put({
+      type: PostsTypes.READ_REQUEST,
+      payload: null,
+    });
+  } catch (err) {
+    // IF ERROR
+    console.log(err);
+    yield put({
+      type: PostTypes.DELETE_FAILURE,
+      payload: null,
+    });
   }
 }

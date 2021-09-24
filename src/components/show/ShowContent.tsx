@@ -3,9 +3,12 @@ import styled from "styled-components";
 import { Container, Row, Button } from "react-bootstrap";
 import { ImArrowLeft, ImArrowRight } from "react-icons/im";
 import { IoReturnDownBackSharp } from "react-icons/io5";
-import { useSelector } from "react-redux";
+import { FcLike } from "react-icons/fc";
+import { MdDelete } from "react-icons/md";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../reducers";
 import { useHistory } from "react-router";
+import { PostActions } from "../../actions/post";
 
 /* STYLE */
 const ShowContainer = styled(Container)`
@@ -57,7 +60,8 @@ const HandleBarRow = styled(Row)`
 const PostInformRow = styled(Row)`
   width: 100%;
   margin-top: 30px;
-  height: 30px;
+  height: 40px;
+  line-height: 2.2;
   span {
     height: 100%;
     text-align: center;
@@ -205,12 +209,29 @@ const Viewer = styled.div`
   padding: 20px;
 `;
 
+const ButtonContainer = styled(Container)`
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+`;
+
+const IconButton = styled.div`
+  svg {
+    cursor: pointer;
+    font-size: 40px;
+    margin: 20px;
+  }
+`;
+
 const ShowContent = (props: any) => {
   /* MAKE HISTORY */
   const history = useHistory();
   /* REDUX */
+  const authState = useSelector((state: RootState) => state.auth);
   const postState = useSelector((state: RootState) => state.post);
   const postsState = useSelector((state: RootState) => state.posts);
+  const dispatch = useDispatch();
   /* USESTATE */
   const [title, setTitle] = useState("");
   const [writer, setWriter] = useState("");
@@ -253,6 +274,11 @@ const ShowContent = (props: any) => {
       });
     }
   };
+  /* DELETE THIS POST */
+  const deletePost = () => {
+    dispatch(PostActions.postdelete(postState.postId));
+    history.push(`/posts/${Math.floor(parseInt(props.idx) / 6) + 1}`);
+  };
 
   return (
     <ShowContainer>
@@ -279,14 +305,28 @@ const ShowContent = (props: any) => {
               id="viewer"
             ></Viewer>
           </Content>
-          <BackButton
-            variant="outline-dark"
-            onClick={() =>
-              history.push(`/posts/${Math.floor(parseInt(props.idx) / 6) + 1}`)
-            }
-          >
-            <IoReturnDownBackSharp />
-          </BackButton>
+          <ButtonContainer>
+            <BackButton
+              variant="outline-dark"
+              onClick={() =>
+                history.push(
+                  `/posts/${Math.floor(parseInt(props.idx) / 6) + 1}`
+                )
+              }
+            >
+              <IoReturnDownBackSharp />
+            </BackButton>
+            <IconButton>
+              <FcLike />
+              {authState.nickname === postState.nickname ? (
+                <>
+                  <MdDelete onClick={deletePost} />
+                </>
+              ) : (
+                <></>
+              )}
+            </IconButton>
+          </ButtonContainer>
         </>
       )}
     </ShowContainer>

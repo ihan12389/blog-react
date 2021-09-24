@@ -76,6 +76,30 @@ const postReducer = (state = initialState, action: PostActionTypes) => {
         errMsg: action.payload,
         loading: false,
       };
+    case PostTypes.DELETE_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case PostTypes.DELETE_SUCCESS:
+      return {
+        ...state,
+        postId: "",
+        title: "",
+        content: "",
+        uid: "",
+        nickname: "",
+        date: "",
+        likes: 0,
+        errMsg: "",
+        loading: false,
+      };
+    case PostTypes.DELETE_FAILURE:
+      return {
+        ...state,
+        errMsg: action.payload,
+        loading: false,
+      };
     default:
       return state;
   }

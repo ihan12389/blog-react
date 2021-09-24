@@ -56,3 +56,22 @@ export const read = async (postId: string) => {
   /* RETURN */
   return response;
 };
+
+/* DELETE API FUNCTION */
+export const postdelete = async (postId: string) => {
+  console.log("delete api 실행!");
+  console.log(postId);
+  /* GET RESPONSE */
+  const response = await axios
+    .delete(`http://localhost:8080/api/postdelete/${postId}`, {
+      params: {
+        postId: postId,
+      },
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  /* RETURN */
+  console.log(response);
+  return response;
+};

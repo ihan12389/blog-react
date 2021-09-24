@@ -7,6 +7,9 @@ export enum PostTypes {
   READ_REQUEST = "post/READ_POST",
   READ_SUCCESS = "post/READ_SUCCESS",
   READ_FAILURE = "post/READ_FAILURE",
+  DELETE_REQUEST = "post/DELETE_REQUEST",
+  DELETE_SUCCESS = "post/DELETE_SUCCESS",
+  DELETE_FAILURE = "post/DELETE_FAILURE",
 }
 /* WRITE DATA INTERFACE */
 export interface WriteData {
@@ -74,6 +77,21 @@ export interface ReadFailureAction {
   payload: string;
 }
 
+export interface DeleteAction {
+  type: PostTypes.DELETE_REQUEST;
+  payload: string;
+}
+
+export interface DeleteSuccess {
+  type: PostTypes.DELETE_SUCCESS;
+  payload: null;
+}
+
+export interface DeleteFailure {
+  type: PostTypes.DELETE_FAILURE;
+  payload: null;
+}
+
 /* POST ACTIONS TYPES EXPORT */
 export type PostActionTypes =
   | WriteAction
@@ -82,7 +100,10 @@ export type PostActionTypes =
   | ChangeMessageAction
   | ReadAction
   | ReadSuccessAction
-  | ReadFailureAction;
+  | ReadFailureAction
+  | DeleteAction
+  | DeleteSuccess
+  | DeleteFailure;
 
 /* WRITE ACTION CREATE FUNCTION */
 export const write = (writeData: WriteData): WriteAction => ({
@@ -96,8 +117,14 @@ export const read = (readData: string): ReadAction => ({
   payload: readData,
 });
 
+export const postdelete = (postId: string): DeleteAction => ({
+  type: PostTypes.DELETE_REQUEST,
+  payload: postId,
+});
+
 /* EXPORT POST ACTION CREATE FUNCTION */
 export const PostActions = {
   write,
   read,
+  postdelete,
 };
