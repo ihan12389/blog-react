@@ -20,6 +20,7 @@ import { persistStore } from "redux-persist";
 const persistConfig = {
   key: "root",
   storage,
+  whitelist: ["auth"],
 };
 
 // Saga Middleware 생성
