@@ -7,7 +7,7 @@ import posts, { PostsState } from "../reducers/posts";
 export interface RootState {
   auth: AuthState;
   post: PostState;
-  posts: Array<PostsState>;
+  posts: PostsState;
 }
 
 /* CREATE ROOT STATE */

@@ -251,9 +251,9 @@ const ShowContent = (props: any) => {
     if (props.idx === 0) {
       alert("이전 포스트가 없습니다.");
     } else {
-      console.log(postsState[props.idx - 1]);
+      console.log(postsState.posts[props.idx - 1]);
       history.push({
-        pathname: `/show/${postsState[props.idx - 1]._id}`,
+        pathname: `/show/${postsState.posts[props.idx - 1]._id}`,
         state: {
           idx: props.idx - 1,
         },
@@ -262,12 +262,12 @@ const ShowContent = (props: any) => {
   };
   /* GO TO FRONT POST */
   const goFrontPost = (event: any) => {
-    if (props.idx === postsState.length - 1) {
+    if (props.idx === postsState.posts.length - 1) {
       alert("더 이상 포스트가 없습니다.");
     } else {
-      console.log(postsState[props.idx + 1]);
+      console.log(postsState.posts[props.idx + 1]);
       history.push({
-        pathname: `/show/${postsState[props.idx + 1]._id}`,
+        pathname: `/show/${postsState.posts[props.idx + 1]._id}`,
         state: {
           idx: props.idx + 1,
         },

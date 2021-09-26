@@ -43,12 +43,14 @@ const ShowContainer = (props: any) => {
     const postId = props.match.params.postId;
 
     if (props.location.state) {
-      console.log(postsState);
+      console.log(postsState.posts);
       setIdx(props.location.state.idx);
     } else {
-      console.log(postsState);
+      console.log(postsState.posts);
       setIdx(
-        postsState.findIndex((post) => post._id === props.match.params.postId)
+        postsState.posts.findIndex(
+          (post) => post._id === props.match.params.postId
+        )
       );
     }
     dispatch(PostActions.read(postId));

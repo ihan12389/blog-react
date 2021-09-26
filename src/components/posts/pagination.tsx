@@ -17,15 +17,22 @@ const ContentPagination = styled(Pagination)`
 const PaginationComponent = (props: any) => {
   /* MAKE HISTORY */
   const history = useHistory();
-  /* REDUX */
-  const postsState = useSelector((state: RootState) => state.posts);
   /* USE STATE */
   const [pageNumArr, setPageNumArr] = useState([0]);
   /* INIT SETTING */
   useEffect(() => {
-    if (props.page <= 2) {
+    console.log(props.len);
+    if (props.page <= 3) {
       setPageNumArr([1, 2, 3, 4, 5]);
-    } else if (parseInt(props.page) === Math.ceil(postsState.length / 6)) {
+    } else if (parseInt(props.page) === 4 && Math.ceil(props.len / 6) === 4) {
+      setPageNumArr([
+        parseInt(props.page) - 2,
+        parseInt(props.page) - 1,
+        parseInt(props.page),
+        parseInt(props.page) + 1,
+        parseInt(props.page) + 2,
+      ]);
+    } else if (parseInt(props.page) === Math.ceil(props.len / 6)) {
       setPageNumArr([
         parseInt(props.page) - 4,
         parseInt(props.page) - 3,
@@ -33,7 +40,7 @@ const PaginationComponent = (props: any) => {
         parseInt(props.page) - 1,
         parseInt(props.page),
       ]);
-    } else if (parseInt(props.page) === Math.ceil(postsState.length / 6) - 1) {
+    } else if (parseInt(props.page) === Math.ceil(props.len / 6) - 1) {
       setPageNumArr([
         parseInt(props.page) - 3,
         parseInt(props.page) - 2,
@@ -42,7 +49,7 @@ const PaginationComponent = (props: any) => {
         parseInt(props.page) + 1,
       ]);
     } else {
-      console.log("Math", Math.ceil(postsState.length / 6));
+      console.log("Math", Math.ceil(props.len / 6));
       setPageNumArr([
         parseInt(props.page) - 2,
         parseInt(props.page) - 1,
@@ -75,9 +82,7 @@ const PaginationComponent = (props: any) => {
         }
       })}
       <Pagination.Last
-        onClick={() =>
-          history.push(`/posts/${Math.ceil(postsState.length / 6)}`)
-        }
+        onClick={() => history.push(`/posts/${Math.ceil(props.len / 6)}`)}
       />
     </ContentPagination>
   );

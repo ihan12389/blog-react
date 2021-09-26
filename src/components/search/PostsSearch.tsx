@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Container,
   Dropdown,
@@ -109,37 +109,60 @@ const SearchInputGroup = styled(InputGroup)`
   }
 `;
 
-/* CHANGE DROPDOWN BUTTON TEXT */
-function clickButton(event: any) {
-  const text = event.target.innerHTML;
-  document.querySelector("#segmented-button-dropdown-2")!.innerHTML = text;
-}
-
-const PostsSearch = () => {
+const PostsSearch = (props: any) => {
+  /* USE STATE */
+  const [search, setSearch] = useState("");
+  const [target, setTarget] = useState("");
   /* INIT SETTING */
   useEffect(() => {
     document.querySelector("#segmented-button-dropdown-2")!.innerHTML =
       "Select";
   }, []);
-
+  /* UPDATE SEARCH'S TEXT */
+  const updateSearch = (event: any) => {
+    setSearch(event.target.value);
+  };
+  /* CHANGE DROPDOWN BUTTON TEXT */
+  const clickButton = (event: any) => {
+    const text = event.target.innerHTML;
+    document.querySelector("#segmented-button-dropdown-2")!.innerHTML = text;
+    setTarget(text);
+  };
+  /* CLICK SUBMIT BUTTON */
+  const searchClick = (event: any) => {
+    console.log(search, target);
+    if (search.length === 0) {
+      alert("검색어를 입력해주세요.");
+      return;
+    }
+    if (target === "") {
+      alert("Action을 선택해주세요.");
+      return;
+    }
+    props.setSearch(search);
+    props.setTarget(target);
+  };
   return (
     <SearchContainer>
       <SearchInputGroup className="mb-3">
         <FormControl
           aria-label="Text input with dropdown button"
           placeholder="Type your Interesting..☆"
+          onChange={updateSearch}
+          value={search}
         />
         <SplitButton
           variant="outline-secondary"
           title="Search"
           id="segmented-button-dropdown-2"
+          onClick={searchClick}
           alignRight
         >
           <Dropdown.Item href="#" onClick={clickButton}>
-            Action
+            nickname
           </Dropdown.Item>
           <Dropdown.Item href="#" onClick={clickButton}>
-            Action2
+            title
           </Dropdown.Item>
         </SplitButton>
       </SearchInputGroup>

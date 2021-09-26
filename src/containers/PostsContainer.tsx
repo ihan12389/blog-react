@@ -29,27 +29,25 @@ const PostsContainer = (props: any) => {
   const dispatch = useDispatch();
   /* USE STATE */
   const [page, setPage] = useState(1);
-  const [currentPostsList, setCurrentPostsList] = useState(postsState);
+  const [currentPostsList, setCurrentPostsList] = useState(postsState.posts);
+  const [search, setSearch] = useState("");
+  const [target, setTarget] = useState("");
   /* INIT SETTING */
   useEffect(() => {
-    dispatch(PostsActions.read());
-  }, [props.match.params.page]);
+    if (search === "" || target === "") {
+      dispatch(PostsActions.read());
+    } else {
+      dispatch(PostsActions.search({ search, target }));
+    }
+  }, [props.match.params.page, search, target]);
 
   useEffect(() => {
-    if (props.match.params.page) {
-      console.log("!", props.match.params.page);
-    } else {
-      console.log("!", props.match.params.page);
-    }
-
-    const slicedArr = postsState.slice(
+    const slicedArr = postsState.posts.slice(
       (props.match.params.page - 1) * 6,
       props.match.params.page * 6
     );
 
-    console.log("slicedArr", slicedArr);
     setCurrentPostsList(slicedArr); // 만약 pageNumber가 1이라면 0~5, 2라면 6~11
-    console.log("current", currentPostsList);
   }, [postsState]);
 
   return (
@@ -59,7 +57,13 @@ const PostsContainer = (props: any) => {
         <PostsHeader />
       </FirstRow>
       <SecondRow>
-        <PostsContent posts={currentPostsList} page={props.match.params.page} />
+        <PostsContent
+          posts={currentPostsList}
+          len={postsState.posts.length}
+          page={props.match.params.page}
+          setSearch={setSearch}
+          setTarget={setTarget}
+        />
       </SecondRow>
     </ContainerPosts>
   );
