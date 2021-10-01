@@ -15,8 +15,6 @@ const ContentPagination = styled(Pagination)`
 `;
 
 const PaginationComponent = (props: any) => {
-  /* MAKE HISTORY */
-  const history = useHistory();
   /* USE STATE */
   const [pageNumArr, setPageNumArr] = useState([0]);
   /* INIT SETTING */
@@ -62,7 +60,7 @@ const PaginationComponent = (props: any) => {
 
   return (
     <ContentPagination>
-      <Pagination.First onClick={() => history.push(`/posts/1`)} />
+      <Pagination.First onClick={() => props.setPage(`1`)} />
       {pageNumArr.map((page) => {
         if (page === parseInt(props.page)) {
           return (
@@ -74,7 +72,7 @@ const PaginationComponent = (props: any) => {
           return (
             <Pagination.Item
               key={page}
-              onClick={() => history.push(`/posts/${page}`)}
+              onClick={() => props.setPage(`${page}`)}
             >
               {page}
             </Pagination.Item>
@@ -82,7 +80,7 @@ const PaginationComponent = (props: any) => {
         }
       })}
       <Pagination.Last
-        onClick={() => history.push(`/posts/${Math.ceil(props.len / 6)}`)}
+        onClick={() => props.setPage(`${Math.ceil(props.len / 6)}`)}
       />
     </ContentPagination>
   );

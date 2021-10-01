@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Container,
   Dropdown,
@@ -6,6 +6,7 @@ import {
   InputGroup,
   SplitButton,
 } from "react-bootstrap";
+import { useHistory } from "react-router";
 import styled from "styled-components";
 
 /* STYLE */
@@ -109,18 +110,43 @@ const SearchInputGroup = styled(InputGroup)`
   }
 `;
 
-/* CHANGE DROPDOWN BUTTON TEXT */
-function clickButton(event: any) {
-  const text = event.target.innerHTML;
-  document.querySelector("#segmented-button-dropdown-2")!.innerHTML = text;
-}
-
 const HeaderSearch = () => {
+  /* MAKE HISTORY */
+  const history = useHistory();
+  /* USE STATE */
+  const [search, setSearch] = useState("");
+  const [target, setTarget] = useState("");
   /* INIT SETTING */
   useEffect(() => {
     document.querySelector("#segmented-button-dropdown-2")!.innerHTML =
       "Select";
   }, []);
+  /* SUBMIT */
+  const submit = () => {
+    if (search === "" || target === "") {
+      alert("검색어와 기준을 모두 선택해주세요.");
+      return;
+    }
+    history.push("/posts/1", {
+      search: search,
+      target: target,
+    });
+  };
+  /* CHECK SUBMIT */
+  const isSubmit = (event: any) => {
+    if (event.charCode === "13") {
+      history.push("/posts/1", {
+        search: search,
+        target: target,
+      });
+    }
+  };
+  /* UPDATE TARGET */
+  const clickButton = (event: any) => {
+    const text = event.target.innerHTML;
+    document.querySelector("#segmented-button-dropdown-2")!.innerHTML = text;
+    setTarget(text);
+  };
 
   return (
     <SearchContainer>
@@ -128,18 +154,23 @@ const HeaderSearch = () => {
         <FormControl
           aria-label="Text input with dropdown button"
           placeholder="Type your Interesting..☆"
+          value={search}
+          onChange={(event) => setSearch(event.target.value)}
+          onSubmit={submit}
+          onKeyPress={isSubmit}
         />
         <SplitButton
           variant="outline-secondary"
           title="Search"
           id="segmented-button-dropdown-2"
           alignRight
+          onClick={submit}
         >
           <Dropdown.Item href="#" onClick={clickButton}>
-            Action
+            nickname
           </Dropdown.Item>
           <Dropdown.Item href="#" onClick={clickButton}>
-            Action2
+            title
           </Dropdown.Item>
         </SplitButton>
       </SearchInputGroup>

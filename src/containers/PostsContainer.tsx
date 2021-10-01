@@ -28,27 +28,32 @@ const PostsContainer = (props: any) => {
   const postsState = useSelector((state: RootState) => state.posts);
   const dispatch = useDispatch();
   /* USE STATE */
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(
+    props.match.params === undefined ? 1 : props.match.params.page
+  );
   const [currentPostsList, setCurrentPostsList] = useState(postsState.posts);
-  const [search, setSearch] = useState("");
-  const [target, setTarget] = useState("");
+  const [search, setSearch] = useState(
+    props.location.state === undefined ? "" : props.location.state.search
+  );
+  const [target, setTarget] = useState(
+    props.location.state === undefined ? "" : props.location.state.target
+  );
+
   /* INIT SETTING */
   useEffect(() => {
     if (search === "" || target === "") {
       dispatch(PostsActions.read());
     } else {
+      console.log(search, target);
       dispatch(PostsActions.search({ search, target }));
     }
-  }, [props.match.params.page, search, target]);
+  }, [search, target]);
 
   useEffect(() => {
-    const slicedArr = postsState.posts.slice(
-      (props.match.params.page - 1) * 6,
-      props.match.params.page * 6
-    );
+    const slicedArr = postsState.posts.slice((page - 1) * 6, page * 6);
 
     setCurrentPostsList(slicedArr); // 만약 pageNumber가 1이라면 0~5, 2라면 6~11
-  }, [postsState]);
+  }, [postsState, page]);
 
   return (
     <ContainerPosts fluid>
@@ -60,7 +65,8 @@ const PostsContainer = (props: any) => {
         <PostsContent
           posts={currentPostsList}
           len={postsState.posts.length}
-          page={props.match.params.page}
+          page={page}
+          setPage={setPage}
           setSearch={setSearch}
           setTarget={setTarget}
         />

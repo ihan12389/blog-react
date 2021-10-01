@@ -220,7 +220,11 @@ const PostsContent = (props: any) => {
   }, [props.page]);
   return (
     <ContentContainer>
-      <PostsSearch setSearch={props.setSearch} setTarget={props.setTarget} />
+      <PostsSearch
+        setSearch={props.setSearch}
+        setTarget={props.setTarget}
+        setPage={props.setPage}
+      />
       {init ? (
         <>
           {/* MAPPING POSTS LIST */}
@@ -304,7 +308,11 @@ const PostsContent = (props: any) => {
         <></>
       )}
 
-      <PaginationComponent page={props.page} len={props.len} />
+      <PaginationComponent
+        page={props.page}
+        setPage={props.setPage}
+        len={props.len}
+      />
     </ContentContainer>
   );
 };

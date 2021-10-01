@@ -118,16 +118,19 @@ const PostsSearch = (props: any) => {
     document.querySelector("#segmented-button-dropdown-2")!.innerHTML =
       "Select";
   }, []);
+
   /* UPDATE SEARCH'S TEXT */
   const updateSearch = (event: any) => {
     setSearch(event.target.value);
   };
+
   /* CHANGE DROPDOWN BUTTON TEXT */
   const clickButton = (event: any) => {
     const text = event.target.innerHTML;
     document.querySelector("#segmented-button-dropdown-2")!.innerHTML = text;
     setTarget(text);
   };
+
   /* CLICK SUBMIT BUTTON */
   const searchClick = (event: any) => {
     console.log(search, target);
@@ -141,7 +144,9 @@ const PostsSearch = (props: any) => {
     }
     props.setSearch(search);
     props.setTarget(target);
+    props.setPage("1");
   };
+
   return (
     <SearchContainer>
       <SearchInputGroup className="mb-3">
