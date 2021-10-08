@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../reducers";
 import { useHistory } from "react-router";
 import { PostActions } from "../../actions/post";
+import { LikesActions } from "../../actions/likes";
 
 /* STYLE */
 const ShowContainer = styled(Container)`
@@ -231,27 +232,33 @@ const ShowContent = (props: any) => {
   const authState = useSelector((state: RootState) => state.auth);
   const postState = useSelector((state: RootState) => state.post);
   const postsState = useSelector((state: RootState) => state.posts);
+  const likesState = useSelector((state: RootState) => state.likes);
   const dispatch = useDispatch();
   /* USESTATE */
   const [title, setTitle] = useState("");
   const [writer, setWriter] = useState("");
-  const [likes, setLikes] = useState(0);
   const [date, setDate] = useState("");
   const [contentDom, setContent] = useState("");
+  const [uids, setUids] = useState([""]);
   /* INIT SETTING */
   useEffect(() => {
     if (postState.title !== "") setTitle(postState.title);
     if (postState.nickname !== "") setWriter(postState.nickname);
     if (postState.date !== "") setDate(postState.date);
-    if (postState.likes !== 0) setLikes(postState.likes);
     if (postState.content !== "") setContent(postState.content);
   }, [postState]);
+
+  useEffect(() => {
+    if (likesState.uids !== undefined) {
+      setUids(likesState.uids);
+    }
+  }, [likesState]);
+
   /* GO TO BACK POST */
   const goBackPost = (event: any) => {
     if (props.idx === 0) {
       alert("이전 포스트가 없습니다.");
     } else {
-      console.log(postsState.posts[props.idx - 1]);
       history.push({
         pathname: `/show/${postsState.posts[props.idx - 1]._id}`,
         state: {
@@ -260,12 +267,12 @@ const ShowContent = (props: any) => {
       });
     }
   };
+
   /* GO TO FRONT POST */
   const goFrontPost = (event: any) => {
     if (props.idx === postsState.posts.length - 1) {
       alert("더 이상 포스트가 없습니다.");
     } else {
-      console.log(postsState.posts[props.idx + 1]);
       history.push({
         pathname: `/show/${postsState.posts[props.idx + 1]._id}`,
         state: {
@@ -274,10 +281,23 @@ const ShowContent = (props: any) => {
       });
     }
   };
+
   /* DELETE THIS POST */
   const deletePost = () => {
     dispatch(PostActions.postdelete(postState.postId));
     history.push(`/posts/${Math.floor(parseInt(props.idx) / 6) + 1}`);
+  };
+
+  /* ADD LIKE */
+  const addLike = () => {
+    if (authState.uid !== undefined) {
+      if (!uids.includes(authState.uid)) {
+        console.log("addLike 실행");
+        console.log(postState.postId, uids);
+        uids.push(authState.uid);
+        dispatch(LikesActions.add({ postId: postState.postId, uids: uids }));
+      }
+    }
   };
 
   return (
@@ -295,7 +315,7 @@ const ShowContent = (props: any) => {
             <span className="postNum">{props.idx}</span>
             <span className="writer">{writer}</span>
             <span className="title">{title}</span>
-            <span className="likes">{likes}</span>
+            <span className="likes">{uids.length}</span>
             <span className="time">{date}</span>
           </PostInformRow>
           <Content>
@@ -317,7 +337,7 @@ const ShowContent = (props: any) => {
               <IoReturnDownBackSharp />
             </BackButton>
             <IconButton>
-              <FcLike />
+              <FcLike onClick={addLike} />
               {authState.nickname === postState.nickname ? (
                 <>
                   <MdDelete onClick={deletePost} />

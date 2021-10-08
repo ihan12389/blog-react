@@ -7,6 +7,7 @@ import ShowContent from "../components/show/ShowContent";
 import { useDispatch, useSelector } from "react-redux";
 import { PostActions } from "../actions/post";
 import { RootState } from "../reducers";
+import { LikesActions } from "../actions/likes";
 
 /* STYLE */
 const ContainerShow = styled(Container)`
@@ -35,8 +36,10 @@ const SecondRow = styled(Row)`
 const ShowContainer = (props: any) => {
   /* USE STATE */
   const [idx, setIdx] = useState(0);
+  const [uids, setUids] = useState([]);
   /* REDUX */
   const postsState = useSelector((state: RootState) => state.posts);
+  const likesState = useSelector((state: RootState) => state.likes);
   const dispatch = useDispatch();
   /* INIT SETTING */
   useEffect(() => {
@@ -56,6 +59,15 @@ const ShowContainer = (props: any) => {
     dispatch(PostActions.read(postId));
   }, [props.match.params.postId]);
 
+  useEffect(() => {
+    const postId = props.match.params.postId;
+    dispatch(LikesActions.read(postId));
+  }, [props.match.params.postId]);
+
+  useEffect(() => {
+    setUids(likesState.uids);
+  }, [likesState]);
+
   return (
     <>
       <ContainerShow>
@@ -64,7 +76,7 @@ const ShowContainer = (props: any) => {
           <ShowHeader />
         </FirstRow>
         <SecondRow>
-          <ShowContent idx={idx} />
+          <ShowContent idx={idx} uids={uids} />
         </SecondRow>
       </ContainerShow>
     </>
