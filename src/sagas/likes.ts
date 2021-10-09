@@ -17,12 +17,9 @@ function* read$(action: ReadAction) {
     const postId = action.payload;
     // TRY API
     const { data } = yield call(likesApi.read, postId);
-    console.log(data);
 
     // GET RESPONSE DATA
     const uids = data[0].uids;
-    console.log(uids);
-    console.log(typeof uids[0]);
 
     // DISPATCH READ SUCCESS
     yield put({
@@ -34,7 +31,7 @@ function* read$(action: ReadAction) {
     console.log(err);
     // DISPATCH READ FAILURE
     yield put({
-      type: LikesTypes.WRITE_FAILURE,
+      type: LikesTypes.READ_FAILURE,
       payload: null,
     });
   }
@@ -42,8 +39,6 @@ function* read$(action: ReadAction) {
 
 function* add$(action: AddAction) {
   try {
-    console.log("Saga Add입니다.");
-    console.log(action.payload);
     const addData = {
       postId: action.payload.postId,
       uids: action.payload.uids,

@@ -13,14 +13,12 @@ export const read = async () => {
     .catch((err) => {
       console.log(err);
     });
-  console.log(response);
   /* RETURN */
   return response;
 };
 
 /* SEARCH API FUNCTION */
 export const search = async (searchData: SearchData) => {
-  console.log(searchData);
   /* GET RESPONSE */
   const response = await axios
     .get(

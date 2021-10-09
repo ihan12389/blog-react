@@ -1,15 +1,15 @@
 import axios from "axios";
 
-interface addData {
-  uids: Array<String>;
+interface WriteData {
   postId: String;
+  comments: Array<Object>;
 }
 
 /* READ API FUNCTION */
 export const read = async (postId: String) => {
   /* GET RESPONSE */
   const response = await axios
-    .get(`http://localhost:8080/api/likes/${postId}`, {
+    .get(`http://localhost:8080/api/comment/${postId}`, {
       params: {
         postId: postId,
       },
@@ -21,16 +21,16 @@ export const read = async (postId: String) => {
   return response;
 };
 
-/* ADD API FUNCTION */
-export const add = async (addData: addData) => {
+/* WRITE API FUNCTION */
+export const write = async (writeData: WriteData) => {
   const request = {
-    postId: addData.postId,
-    uids: addData.uids,
+    postId: writeData.postId,
+    comments: writeData.comments,
   };
 
   /* GET RESPONSE */
   const response = await axios
-    .post(`http://localhost:8080/api/likes/add`, request)
+    .post(`http://localhost:8080/api/comment/write`, request)
     .catch((err) => {
       console.log(err);
     });

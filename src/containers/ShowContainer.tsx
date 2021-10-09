@@ -8,6 +8,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { PostActions } from "../actions/post";
 import { RootState } from "../reducers";
 import { LikesActions } from "../actions/likes";
+import { PostsActions } from "../actions/posts";
+import Comments from "../components/show/Comments";
 
 /* STYLE */
 const ContainerShow = styled(Container)`
@@ -33,6 +35,10 @@ const SecondRow = styled(Row)`
   margin: 0;
 `;
 
+const ThirdRow = styled(Row)`
+  margin: 0;
+`;
+
 const ShowContainer = (props: any) => {
   /* USE STATE */
   const [idx, setIdx] = useState(0);
@@ -44,7 +50,6 @@ const ShowContainer = (props: any) => {
   /* INIT SETTING */
   useEffect(() => {
     const postId = props.match.params.postId;
-
     if (props.location.state) {
       console.log(postsState.posts);
       setIdx(props.location.state.idx);
@@ -68,6 +73,12 @@ const ShowContainer = (props: any) => {
     setUids(likesState.uids);
   }, [likesState]);
 
+  useEffect(() => {
+    if (postsState.posts.length === 1) {
+      dispatch(PostsActions.read());
+    }
+  }, [postsState.posts]);
+
   return (
     <>
       <ContainerShow>
@@ -78,6 +89,9 @@ const ShowContainer = (props: any) => {
         <SecondRow>
           <ShowContent idx={idx} uids={uids} />
         </SecondRow>
+        <ThirdRow>
+          <Comments />
+        </ThirdRow>
       </ContainerShow>
     </>
   );
