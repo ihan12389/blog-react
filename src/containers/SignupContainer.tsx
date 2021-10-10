@@ -99,7 +99,7 @@ const SignupContainer = ({ props }: any) => {
   /* INIT SETTING */
   useEffect(() => {
     if (authState.uid !== undefined) {
-      history.push("/");
+      history.push("/lihano-board/");
     }
   }, [authState]);
   /* UPDATE TEXT */
@@ -146,7 +146,7 @@ const SignupContainer = ({ props }: any) => {
     const result = await signup({ email, password, nickname });
     if (result === 1) {
       alert("회원가입 되었습니다.");
-      history.push("/login");
+      history.push("/lihano-board/login");
     } else if (result === 0) {
       setErrMsg("이미 존재하는 회원정보입니다.");
     } else {

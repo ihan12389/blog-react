@@ -45,7 +45,7 @@ const SideBar = () => {
       variant="outline-secondary"
       title="Menu"
     >
-      <Dropdown.Item as={Link} to="/">
+      <Dropdown.Item as={Link} to="/lihano-board/">
         Main
       </Dropdown.Item>
       <Dropdown.Item onClick={logout}>Logout</Dropdown.Item>

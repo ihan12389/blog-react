@@ -236,7 +236,7 @@ const PostsContent = (props: any) => {
                     <>
                       <LinkComponent
                         to={{
-                          pathname: `/show/${post._id}`,
+                          pathname: `/lihano-board/show/${post._id}`,
                           state: {
                             idx: (parseInt(props.page) - 1) * 6 + idx,
                           },
@@ -263,7 +263,7 @@ const PostsContent = (props: any) => {
                     <>
                       <LinkComponent
                         to={{
-                          pathname: `/show/${post._id}`,
+                          pathname: `/lihano-board/show/${post._id}`,
                           state: {
                             idx: (parseInt(props.page) - 1) * 6 + idx,
                           },
@@ -301,7 +301,7 @@ const PostsContent = (props: any) => {
       )}
 
       {authState.uid !== undefined ? (
-        <Link to="/write">
+        <Link to="/lihano-board/write">
           <WriteButton variant="outline-secondary">Write</WriteButton>
         </Link>
       ) : (

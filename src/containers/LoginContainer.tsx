@@ -123,7 +123,7 @@ const LoginContainer = ({ history }: any) => {
   /* INIT SETTING */
   useEffect(() => {
     if (authState.uid !== undefined) {
-      history.push("/");
+      history.push("/lihano-board/");
     }
   }, [authState]);
 

@@ -21,7 +21,7 @@ const Router = () => {
           component={PostsContainer}
         ></Route>
         <Route
-          path="/lihano-board//show/:postId"
+          path="/lihano-board/show/:postId"
           component={ShowContainer}
         ></Route>
         <Route path="/lihano-board/write" component={WriteContainer}></Route>

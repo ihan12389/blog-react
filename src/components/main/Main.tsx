@@ -165,7 +165,7 @@ const Main = () => {
                 </div>
               </Row>
             </GridContainer>
-            <Link to="/posts/1">
+            <Link to="/lihano-board/posts/1">
               <GoPostsButton variant="secondary" size="lg">
                 Show More Posts!
               </GoPostsButton>

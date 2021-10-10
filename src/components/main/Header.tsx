@@ -134,12 +134,12 @@ const Header = () => {
       </LabelContainer>
       {authState.uid === undefined ? (
         <AuthContainer>
-          <Link to="/login">
+          <Link to="/lihano-board/login">
             <AuthButton variant="dark" size="lg">
               Log In
             </AuthButton>
           </Link>
-          <Link to="/signup">
+          <Link to="/lihano-board/signup">
             <AuthButton variant="dark" size="lg">
               Sign Up
             </AuthButton>
@@ -147,7 +147,7 @@ const Header = () => {
         </AuthContainer>
       ) : (
         <AuthContainer>
-          <Link to="/posts/1">
+          <Link to="/lihano-board/posts/1">
             <PostButton variant="danger">Go to the Posts Page!</PostButton>
           </Link>
         </AuthContainer>

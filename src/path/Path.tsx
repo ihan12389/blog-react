@@ -18,7 +18,7 @@ const Path = (props: any) => {
     console.log(postsState);
     // MOVE POST PAGE
     setTimeout(() => {
-      history.push(`/show/${props.match.params.postId}`);
+      history.push(`/lihano-board/show/${props.match.params.postId}`);
     }, 1000);
   }, []);
 

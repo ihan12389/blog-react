@@ -260,7 +260,7 @@ const ShowContent = (props: any) => {
       alert("이전 포스트가 없습니다.");
     } else {
       history.push({
-        pathname: `/show/${postsState.posts[props.idx - 1]._id}`,
+        pathname: `/lihano-board/show/${postsState.posts[props.idx - 1]._id}`,
         state: {
           idx: props.idx - 1,
         },
@@ -274,7 +274,7 @@ const ShowContent = (props: any) => {
       alert("더 이상 포스트가 없습니다.");
     } else {
       history.push({
-        pathname: `/show/${postsState.posts[props.idx + 1]._id}`,
+        pathname: `/lihano-board/show/${postsState.posts[props.idx + 1]._id}`,
         state: {
           idx: props.idx + 1,
         },
@@ -285,7 +285,9 @@ const ShowContent = (props: any) => {
   /* DELETE THIS POST */
   const deletePost = () => {
     dispatch(PostActions.postdelete(postState.postId));
-    history.push(`/posts/${Math.floor(parseInt(props.idx) / 6) + 1}`);
+    history.push(
+      `/lihano-board/posts/${Math.floor(parseInt(props.idx) / 6) + 1}`
+    );
   };
 
   /* ADD LIKE */
@@ -330,7 +332,9 @@ const ShowContent = (props: any) => {
               variant="outline-dark"
               onClick={() =>
                 history.push(
-                  `/posts/${Math.floor(parseInt(props.idx) / 6) + 1}`
+                  `/lihano-board/posts/${
+                    Math.floor(parseInt(props.idx) / 6) + 1
+                  }`
                 )
               }
             >
