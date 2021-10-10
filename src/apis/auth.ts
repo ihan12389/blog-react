@@ -28,7 +28,7 @@ export const signup = async (signupData: SignupData) => {
   };
   // GET RESPONSE'S RESULT
   await axios
-    .post("http://localhost:8080/api/signup", request)
+    .post("https://lihano-board.herokuapp.com/api/signup", request)
     .then((res) => {
       result = res.data.result;
     })
@@ -47,7 +47,7 @@ export const login = async (loginData: LoginData) => {
   };
   // GET RESPONSE
   const response = await axios
-    .post(`http://localhost:8080/api/login`, request)
+    .post(`https://lihano-board.herokuapp.com/api/login`, request)
     .catch((err) => console.log(err));
   // RETURN
   return response;

@@ -9,7 +9,7 @@ interface SearchData {
 export const read = async () => {
   /* GET RESPONSE */
   const response = await axios
-    .get(`http://localhost:8080/api/posts`)
+    .get(`https://lihano-board.herokuapp.com/api/posts`)
     .catch((err) => {
       console.log(err);
     });
@@ -22,7 +22,7 @@ export const search = async (searchData: SearchData) => {
   /* GET RESPONSE */
   const response = await axios
     .get(
-      `http://localhost:8080/api/search/${searchData.search}&&${searchData.target}`,
+      `https://lihano-board.herokuapp.com/api/search/${searchData.search}&&${searchData.target}`,
       {
         params: {
           search: searchData.search,

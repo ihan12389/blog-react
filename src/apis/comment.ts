@@ -9,7 +9,7 @@ interface WriteData {
 export const read = async (postId: String) => {
   /* GET RESPONSE */
   const response = await axios
-    .get(`http://localhost:8080/api/comment/${postId}`, {
+    .get(`https://lihano-board.herokuapp.com/api/comment/${postId}`, {
       params: {
         postId: postId,
       },
@@ -30,7 +30,7 @@ export const write = async (writeData: WriteData) => {
 
   /* GET RESPONSE */
   const response = await axios
-    .post(`http://localhost:8080/api/comment/write`, request)
+    .post(`https://lihano-board.herokuapp.com/api/comment/write`, request)
     .catch((err) => {
       console.log(err);
     });
