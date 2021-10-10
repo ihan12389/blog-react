@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Switch, Route, BrowserRouter } from "react-router-dom";
+import { Switch, Route, HashRouter } from "react-router-dom";
 import MainContainer from "./containers/MainContainer";
 import PostsContainer from "./containers/PostsContainer";
 import ShowContainer from "./containers/ShowContainer";
@@ -13,7 +13,7 @@ const Router = () => {
     console.log("Router");
   }, []);
   return (
-    <BrowserRouter basename="lihano-board">
+    <HashRouter>
       <Switch>
         <Route path="/" exact component={MainContainer}></Route>
         <Route path="/posts/:page" component={PostsContainer}></Route>
@@ -23,7 +23,7 @@ const Router = () => {
         <Route path="/signup" component={SignupContainer}></Route>
         <Route path="/path/:postId" component={Path}></Route>
       </Switch>
-    </BrowserRouter>
+    </HashRouter>
   );
 };
 
