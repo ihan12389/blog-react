@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { Container, Row } from "react-bootstrap";
 import Header from "../components/main/Header";
@@ -35,6 +35,9 @@ const SecondRow = styled(Row)`
 `;
 
 const MainContainer = () => {
+  useEffect(() => {
+    console.log("MainContainer");
+  }, []);
   return (
     <TopContainer>
       <FirstRow>
