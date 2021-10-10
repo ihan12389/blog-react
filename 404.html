@@ -25,6 +25,7 @@
       var pathSegmentsToKeep = 0;
 
       var l = window.location;
+      var segmentCount = 0;
       l.replace(
         l.protocol +
           "//" +
@@ -34,7 +35,7 @@
             .split("/")
             .slice(0, 1 + pathSegmentsToKeep)
             .join("/") +
-          "/" +
+          "/?/" +
           l.pathname
             .slice(1)
             .split("/")
@@ -42,8 +43,7 @@
             .join("/")
             .replace(/&/g, "~and~") +
           (l.search ? "&" + l.search.slice(1).replace(/&/g, "~and~") : "") +
-          l.hash +
-          "/?/"
+          l.hash
       );
     </script>
   </head>
