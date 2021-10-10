@@ -55,14 +55,16 @@ const ShowContainer = (props: any) => {
       setIdx(props.location.state.idx);
     } else {
       console.log(postsState.posts);
-      setIdx(
-        postsState.posts.findIndex(
-          (post) => post._id === props.match.params.postId
-        )
-      );
+      if (postsState.posts !== undefined || postsState.posts !== []) {
+        setIdx(
+          postsState.posts.findIndex(
+            (post) => post._id === props.match.params.postId
+          )
+        );
+      }
     }
     dispatch(PostActions.read(postId));
-  }, [props.match.params.postId]);
+  }, [props.match.params.postId, postsState.posts]);
 
   useEffect(() => {
     const postId = props.match.params.postId;
