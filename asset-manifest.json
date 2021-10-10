@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/lihano-board/static/css/main.08d0cfd1.chunk.css",
+    "main.js": "/lihano-board/static/js/main.340764f6.chunk.js",
+    "main.js.map": "/lihano-board/static/js/main.340764f6.chunk.js.map",
+    "runtime-main.js": "/lihano-board/static/js/runtime-main.f602b66d.js",
+    "runtime-main.js.map": "/lihano-board/static/js/runtime-main.f602b66d.js.map",
+    "static/css/2.53150396.chunk.css": "/lihano-board/static/css/2.53150396.chunk.css",
+    "static/js/2.335eee71.chunk.js": "/lihano-board/static/js/2.335eee71.chunk.js",
+    "static/js/2.335eee71.chunk.js.map": "/lihano-board/static/js/2.335eee71.chunk.js.map",
+    "index.html": "/lihano-board/index.html",
+    "static/css/2.53150396.chunk.css.map": "/lihano-board/static/css/2.53150396.chunk.css.map",
+    "static/css/main.08d0cfd1.chunk.css.map": "/lihano-board/static/css/main.08d0cfd1.chunk.css.map",
+    "static/js/2.335eee71.chunk.js.LICENSE.txt": "/lihano-board/static/js/2.335eee71.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.f602b66d.js",
+    "static/css/2.53150396.chunk.css",
+    "static/js/2.335eee71.chunk.js",
+    "static/css/main.08d0cfd1.chunk.css",
+    "static/js/main.340764f6.chunk.js"
+  ]
+}
