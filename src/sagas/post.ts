@@ -50,7 +50,7 @@ function* success$(action: WriteSuccessAction) {
   try {
     // GO TO PATH PAGE
     // eslint-disable-next-line no-restricted-globals
-    location.href = `/lihano-board/path/${action.payload.postId}`;
+    location.href = `/path/${action.payload.postId}`;
   } catch (err) {
     console.log(err);
   }
@@ -95,7 +95,7 @@ function* read$(action: ReadAction) {
     // GO MAIN PAGE
     alert("게시물을 찾을 수가 없습니다.");
     // eslint-disable-next-line no-restricted-globals
-    location.href = "/lihano-board/";
+    location.href = "/";
   }
 }
 

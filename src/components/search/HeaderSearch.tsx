@@ -127,7 +127,7 @@ const HeaderSearch = () => {
       alert("검색어와 기준을 모두 선택해주세요.");
       return;
     }
-    history.push("/lihano-board/posts/1", {
+    history.push("/posts/1", {
       search: search,
       target: target,
     });
@@ -135,7 +135,7 @@ const HeaderSearch = () => {
   /* CHECK SUBMIT */
   const isSubmit = (event: any) => {
     if (event.charCode === "13") {
-      history.push("/lihano-board/posts/1", {
+      history.push("/posts/1", {
         search: search,
         target: target,
       });

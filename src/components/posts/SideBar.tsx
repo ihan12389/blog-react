@@ -50,22 +50,22 @@ const SideBar = () => {
     >
       {authState.uid === undefined ? (
         <>
-          <Dropdown.Item as={Link} to="/lihano-board/">
+          <Dropdown.Item as={Link} to="/">
             Main
           </Dropdown.Item>
-          <Dropdown.Item as={Link} to="/lihano-board/login">
+          <Dropdown.Item as={Link} to="/login">
             Log In
           </Dropdown.Item>
-          <Dropdown.Item as={Link} to="/lihano-board/signup">
+          <Dropdown.Item as={Link} to="/signup">
             Sign Up
           </Dropdown.Item>
         </>
       ) : (
         <>
-          <Dropdown.Item as={Link} to="/lihano-board/">
+          <Dropdown.Item as={Link} to="/">
             Main
           </Dropdown.Item>
-          <Dropdown.Item as={Link} to="/lihano-board/write">
+          <Dropdown.Item as={Link} to="/write">
             Write
           </Dropdown.Item>
           <Dropdown.Item onClick={logout}>Logout</Dropdown.Item>

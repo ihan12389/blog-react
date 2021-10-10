@@ -13,21 +13,15 @@ const Router = () => {
     console.log("Router");
   }, []);
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="lihano-board">
       <Switch>
-        <Route path="/lihano-board" exact component={MainContainer}></Route>
-        <Route
-          path="/lihano-board/posts/:page"
-          component={PostsContainer}
-        ></Route>
-        <Route
-          path="/lihano-board/show/:postId"
-          component={ShowContainer}
-        ></Route>
-        <Route path="/lihano-board/write" component={WriteContainer}></Route>
-        <Route path="/lihano-board/login" component={LoginContainer}></Route>
-        <Route path="/lihano-board/signup" component={SignupContainer}></Route>
-        <Route path="/lihano-board/path/:postId" component={Path}></Route>
+        <Route path="/" exact component={MainContainer}></Route>
+        <Route path="/posts/:page" component={PostsContainer}></Route>
+        <Route path="/show/:postId" component={ShowContainer}></Route>
+        <Route path="/write" component={WriteContainer}></Route>
+        <Route path="/login" component={LoginContainer}></Route>
+        <Route path="/signup" component={SignupContainer}></Route>
+        <Route path="/path/:postId" component={Path}></Route>
       </Switch>
     </BrowserRouter>
   );

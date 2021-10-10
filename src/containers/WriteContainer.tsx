@@ -56,7 +56,7 @@ const WriteContainer = ({ history }: any) => {
         </>
       ) : (
         <>
-          <Redirect to="/lihano-board/" />
+          <Redirect to="/" />
         </>
       )}
     </ContainerShow>
