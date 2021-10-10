@@ -50,7 +50,7 @@ function* success$(action: WriteSuccessAction) {
   try {
     // GO TO PATH PAGE
     // eslint-disable-next-line no-restricted-globals
-    location.href = `/lihano-board/path/${action.payload.postId}`;
+    location.href = `/lihano-board/#/path/${action.payload.postId}`;
   } catch (err) {
     console.log(err);
   }
