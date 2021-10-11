@@ -159,10 +159,6 @@ const LoginContainer = ({ history }: any) => {
           </Form.Text>
         </Form.Group>
 
-        <Form.Group className="mb-3" controlId="formBasicCheckbox">
-          <Form.Check type="checkbox" label="Check me out" />
-        </Form.Group>
-
         {errMsg !== "" ? <ErrMsg>{errMsg}</ErrMsg> : <></>}
 
         <ButtonWrapper>

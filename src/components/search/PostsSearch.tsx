@@ -139,7 +139,7 @@ const PostsSearch = (props: any) => {
       return;
     }
     if (target === "") {
-      alert("Action을 선택해주세요.");
+      alert("기준을 선택해주세요.");
       return;
     }
     props.setSearch(search);

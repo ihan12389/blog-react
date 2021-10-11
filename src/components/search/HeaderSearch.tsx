@@ -127,9 +127,12 @@ const HeaderSearch = () => {
       alert("검색어와 기준을 모두 선택해주세요.");
       return;
     }
-    history.push("/posts/1", {
-      search: search,
-      target: target,
+    history.push({
+      pathname: "/posts/1",
+      state: {
+        search: search,
+        target: target,
+      },
     });
   };
   /* CHECK SUBMIT */

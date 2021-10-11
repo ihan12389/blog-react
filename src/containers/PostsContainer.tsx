@@ -41,6 +41,7 @@ const PostsContainer = (props: any) => {
 
   /* INIT SETTING */
   useEffect(() => {
+    console.log("post의 search와 target", search, target);
     if (search === "" || target === "") {
       dispatch(PostsActions.read());
     } else {
@@ -54,6 +55,10 @@ const PostsContainer = (props: any) => {
 
     setCurrentPostsList(slicedArr); // 만약 pageNumber가 1이라면 0~5, 2라면 6~11
   }, [postsState, page]);
+
+  useEffect(() => {
+    console.log(props.location);
+  }, [props.location.state]);
 
   return (
     <ContainerPosts fluid>
