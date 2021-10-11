@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Container, Row, Card, Button, Spinner } from "react-bootstrap";
 import "../../style/fonts.css";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 /* STYLE */
 const MainContainer = styled(Container)`
@@ -54,6 +54,7 @@ const GridContainer = styled(Container)`
 
 const MainCard = styled(Card)`
   margin: 10px;
+  cursor: pointer;
   .card-text {
     white-space: nowrap;
     overflow: hidden;
@@ -105,6 +106,8 @@ const MainSpinner = styled(Spinner)`
 `;
 
 const Main = () => {
+  /* MAKE HISTORY */
+  const history = useHistory();
   /* USE STATE */
   const [init, setInit] = useState(false);
   /* INIT SETTING */
@@ -128,38 +131,61 @@ const Main = () => {
             <GridContainer>
               <Row xs={1} sm={2}>
                 <div>
-                  <MainCard aria-hidden="true">
+                  <MainCard
+                    aria-hidden="true"
+                    onClick={() =>
+                      history.push("/show/6163a1fb9cae186f093f522f")
+                    }
+                  >
                     <Card.Img variant="top" src="./images/12.jpg" />
                     <Card.Body>
-                      <Card.Text>Wow! Bootstrap is So Wonderful!</Card.Text>
-                      <Card.Title>LEE HAN</Card.Title>
+                      <Card.Text>
+                        It uses CKEditor to provide powerful Writing Functions.
+                      </Card.Text>
+                      <Card.Title>Lihano</Card.Title>
                     </Card.Body>
                   </MainCard>
                 </div>
                 <div>
-                  <MainCard>
+                  <MainCard
+                    onClick={() =>
+                      history.push("/show/6163a19b9cae186f093f5223")
+                    }
+                  >
                     <Card.Img variant="top" src="./images/13.jpg" />
                     <Card.Body>
-                      <Card.Text>Wow! Bootstrap is So Wonderful!</Card.Text>
-                      <Card.Title>LEE HAN</Card.Title>
+                      <Card.Text>
+                        We are using MongoDB-based Express Server.
+                      </Card.Text>
+                      <Card.Title>Lihano</Card.Title>
                     </Card.Body>
                   </MainCard>
                 </div>
                 <div>
-                  <MainCard>
+                  <MainCard
+                    onClick={() =>
+                      history.push("/show/6163a13c9cae186f093f5215")
+                    }
+                  >
                     <Card.Img variant="top" src="./images/14.jpg" />
                     <Card.Body>
-                      <Card.Text>Wow! Bootstrap is So Wonderful!</Card.Text>
-                      <Card.Title>LEE HAN</Card.Title>
+                      <Card.Text>
+                        This homepage is made of React & Bootstrap.
+                      </Card.Text>
+                      <Card.Title>Lihano</Card.Title>
                     </Card.Body>
                   </MainCard>
                 </div>
                 <div>
-                  <MainCard>
+                  <MainCard
+                    onClick={() =>
+                      history.push("/show/6163a0c29cae186f093f5209")
+                    }
+                  >
                     <Card.Img variant="top" src="./images/15.jpg" />
                     <Card.Body>
-                      <Card.Text>Wow! Bootstrap is So Wonderful!</Card.Text>
-                      <Card.Title>LEE HAN</Card.Title>
+                      <Card.Text>Welcome to my Board!</Card.Text>
+                      <Card.Title>Lihano</Card.Title>
                     </Card.Body>
                   </MainCard>
                 </div>
