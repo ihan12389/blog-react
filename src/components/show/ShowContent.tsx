@@ -61,13 +61,24 @@ const HandleBarRow = styled(Row)`
 const PostInformRow = styled(Row)`
   width: 100%;
   margin-top: 30px;
-  height: 40px;
   line-height: 2.2;
   span {
+    display: block;
     height: 100%;
     text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .postNum {
+    background-color: #dddddd;
+  }
+  .likes {
+    background-color: #ff7eb3;
   }
   @media (max-width: 760px) {
+    font-size: 13px;
+    line-height: 2.2;
     .postNum {
       width: 50px;
       border: 1px solid black;
@@ -85,7 +96,7 @@ const PostInformRow = styled(Row)`
       border-right: 1px solid black;
     }
     .likes {
-      width: 50px;
+      width: 70px;
       border-top: 1px solid black;
       border-bottom: 1px solid black;
       border-right: 1px solid black;
@@ -99,6 +110,7 @@ const PostInformRow = styled(Row)`
     }
   }
   @media (min-width: 760px) {
+    font-size: 13px;
     .postNum {
       width: 50px;
       border: 1px solid black;
@@ -116,7 +128,7 @@ const PostInformRow = styled(Row)`
       border-right: 1px solid black;
     }
     .likes {
-      width: 50px;
+      width: 70px;
       border-top: 1px solid black;
       border-bottom: 1px solid black;
       border-right: 1px solid black;
@@ -129,6 +141,8 @@ const PostInformRow = styled(Row)`
     }
   }
   @media (min-width: 992px) {
+    font-size: 16px;
+    height: 40px;
     .postNum {
       width: 60px;
       border: 1px solid black;
@@ -146,7 +160,7 @@ const PostInformRow = styled(Row)`
       border-right: 1px solid black;
     }
     .likes {
-      width: 60px;
+      width: 80px;
       border-top: 1px solid black;
       border-bottom: 1px solid black;
       border-right: 1px solid black;
@@ -315,7 +329,7 @@ const ShowContent = (props: any) => {
             <span className="postNum">{props.idx}</span>
             <span className="writer">{writer}</span>
             <span className="title">{title}</span>
-            <span className="likes">{uids.length}</span>
+            <span className="likes">👍{uids.length}</span>
             <span className="time">{date}</span>
           </PostInformRow>
           <Content>

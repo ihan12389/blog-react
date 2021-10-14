@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Container, Row, Image, Button, Spinner } from "react-bootstrap";
 import "../../style/fonts.css";
 import PostsSearch from "../search/PostsSearch";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import PaginationComponent from "./pagination";
 import { useSelector } from "react-redux";
 import { RootState } from "../../reducers";
@@ -205,6 +205,8 @@ const WriteButton = styled(Button)`
 `;
 
 const PostsContent = (props: any) => {
+  /* MAKE HISTORY */
+  const history = useHistory();
   /* GET PROPS STATE */
   const posts = props.posts;
   /* USE STATE */
@@ -301,9 +303,12 @@ const PostsContent = (props: any) => {
       )}
 
       {authState.uid !== undefined ? (
-        <Link to="/write">
-          <WriteButton variant="outline-secondary">Write</WriteButton>
-        </Link>
+        <WriteButton
+          variant="outline-secondary"
+          onClick={() => history.push("/write")}
+        >
+          Write
+        </WriteButton>
       ) : (
         <></>
       )}

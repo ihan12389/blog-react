@@ -30,6 +30,16 @@ const SideMenu = styled(DropdownButton)`
     right: 100px;
   }
 `;
+const NicknameItem = styled.div`
+  width: 100%;
+  margin-top: -10px;
+  padding: 7px 5px;
+  font-family: "Roboto Mono", monospace;
+  background-color: #eeeeee;
+  font-size: 16px;
+  color: #66a6ff;
+  text-align: center;
+`;
 
 const SideBar = () => {
   /* REDUX */
@@ -61,6 +71,7 @@ const SideBar = () => {
         </>
       ) : (
         <>
+          <NicknameItem>{authState.nickname}</NicknameItem>
           <Dropdown.Item as={Link} to="/">
             Main
           </Dropdown.Item>

@@ -9,6 +9,7 @@ interface SearchData {
 export const read = async () => {
   /* GET RESPONSE */
   const response = await axios
+    // .get("http://localhost:3000/api/posts")
     .get(`https://lihano-board.herokuapp.com/api/posts`)
     .catch((err) => {
       console.log(err);

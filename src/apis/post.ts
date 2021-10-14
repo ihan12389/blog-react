@@ -34,6 +34,7 @@ export const write = async (writeData: WriteData) => {
   };
   /* GET RESPONSE */
   const response = await axios
+    // .post("http://localhost:3000/api/write", request)
     .post("https://lihano-board.herokuapp.com/api/write", request)
     .catch((err) => {
       console.log(err);
@@ -45,6 +46,7 @@ export const write = async (writeData: WriteData) => {
 export const read = async (postId: string) => {
   /* GET RESPONSE */
   const response = await axios
+    // .get(`http://localhost:3000/api/read/${postId}`, {
     .get(`https://lihano-board.herokuapp.com/api/read/${postId}`, {
       params: {
         postId: postId,
@@ -61,6 +63,7 @@ export const read = async (postId: string) => {
 export const postdelete = async (postId: string) => {
   /* GET RESPONSE */
   const response = await axios
+    // .delete(`http://localhost:3000/api/postdelete/${postId}`, {
     .delete(`https://lihano-board.herokuapp.com/api/postdelete/${postId}`, {
       params: {
         postId: postId,

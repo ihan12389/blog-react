@@ -179,7 +179,7 @@ const Main = () => {
                 <div>
                   <MainCard
                     onClick={() =>
-                      history.push("/show/6163a0c29cae186f093f5209")
+                      history.push("/show/6163b24c9cae186f093f52db")
                     }
                   >
                     <Card.Img variant="top" src="./images/15.jpg" />

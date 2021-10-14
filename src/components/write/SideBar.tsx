@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { AuthActions } from "../../actions/auth";
 import { DropdownButton, Dropdown, ButtonGroup } from "react-bootstrap";
+import { RootState } from "../../reducers";
 
 /* STYLE */
 const SideMenu = styled(DropdownButton)`
@@ -30,9 +31,21 @@ const SideMenu = styled(DropdownButton)`
   }
 `;
 
+const NicknameItem = styled.div`
+  width: 100%;
+  margin-top: -10px;
+  padding: 7px 5px;
+  font-family: "Roboto Mono", monospace;
+  background-color: #eeeeee;
+  font-size: 16px;
+  color: #66a6ff;
+  text-align: center;
+`;
+
 const SideBar = () => {
   /* REDUX */
   const dispatch = useDispatch();
+  const authState = useSelector((state: RootState) => state.auth);
   /* LOGOUT */
   const logout = () => {
     dispatch(AuthActions.logout());
@@ -45,6 +58,7 @@ const SideBar = () => {
       variant="outline-secondary"
       title="Menu"
     >
+      <NicknameItem>{authState.nickname}</NicknameItem>
       <Dropdown.Item as={Link} to="/">
         Main
       </Dropdown.Item>

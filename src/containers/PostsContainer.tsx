@@ -23,6 +23,16 @@ const SecondRow = styled(Row)`
   margin: 0;
 `;
 
+const LoadingContainer = styled(Container)`
+  width: 100%;
+  margin: 60px 0px;
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  font-size: 30px;
+  font-weight: bold;
+`;
+
 const PostsContainer = (props: any) => {
   /* REDUX */
   const postsState = useSelector((state: RootState) => state.posts);
@@ -38,6 +48,7 @@ const PostsContainer = (props: any) => {
   const [target, setTarget] = useState(
     props.location.state === undefined ? "" : props.location.state.target
   );
+  const [loading, setLoading] = useState(false);
 
   /* INIT SETTING */
   useEffect(() => {
@@ -60,6 +71,16 @@ const PostsContainer = (props: any) => {
     console.log(props.location);
   }, [props.location.state]);
 
+  useEffect(() => {
+    if (postsState.loading !== undefined) {
+      if (postsState.loading === false) {
+        setLoading(false);
+      } else {
+        setLoading(true);
+      }
+    }
+  }, [postsState.loading]);
+
   return (
     <ContainerPosts fluid>
       <SideBar />
@@ -67,14 +88,22 @@ const PostsContainer = (props: any) => {
         <PostsHeader />
       </FirstRow>
       <SecondRow>
-        <PostsContent
-          posts={currentPostsList}
-          len={postsState.posts.length}
-          page={page}
-          setPage={setPage}
-          setSearch={setSearch}
-          setTarget={setTarget}
-        />
+        {loading ? (
+          <>
+            <LoadingContainer>is Loading. . .</LoadingContainer>
+          </>
+        ) : (
+          <>
+            <PostsContent
+              posts={currentPostsList}
+              len={postsState.posts.length}
+              page={page}
+              setPage={setPage}
+              setSearch={setSearch}
+              setTarget={setTarget}
+            />
+          </>
+        )}
       </SecondRow>
     </ContainerPosts>
   );
