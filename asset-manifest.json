@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/lihano-board/static/css/main.08d0cfd1.chunk.css",
-    "main.js": "/lihano-board/static/js/main.bf8c9136.chunk.js",
-    "main.js.map": "/lihano-board/static/js/main.bf8c9136.chunk.js.map",
+    "main.js": "/lihano-board/static/js/main.dca91203.chunk.js",
+    "main.js.map": "/lihano-board/static/js/main.dca91203.chunk.js.map",
     "runtime-main.js": "/lihano-board/static/js/runtime-main.f602b66d.js",
     "runtime-main.js.map": "/lihano-board/static/js/runtime-main.f602b66d.js.map",
     "static/css/2.53150396.chunk.css": "/lihano-board/static/css/2.53150396.chunk.css",
@@ -18,6 +18,6 @@
     "static/css/2.53150396.chunk.css",
     "static/js/2.d6661863.chunk.js",
     "static/css/main.08d0cfd1.chunk.css",
-    "static/js/main.bf8c9136.chunk.js"
+    "static/js/main.dca91203.chunk.js"
   ]
 }
