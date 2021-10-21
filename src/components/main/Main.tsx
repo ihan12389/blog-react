@@ -124,9 +124,9 @@ const Main = () => {
           <MainContainer>
             <Title>Hello World!!</Title>
             <Explain>
-              The World is waiting for your News!
+              The World wants to hear your Story!
               <br />
-              Find your Enteresting in My Space!
+              Please write down Your Story here!
             </Explain>
             <GridContainer>
               <Row xs={1} sm={2}>

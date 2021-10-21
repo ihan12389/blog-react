@@ -62,10 +62,10 @@ const SubTitle = styled.span`
 const PostsHeader = () => {
   return (
     <HeaderContainer>
-      <Title>THIS IS LIHANO BLOG</Title>
+      <Title>THIS IS LIHANO BOARD</Title>
 
       <SubTitle>
-        I WANT YOUR NEWS SO WRITE YOUR THINKING.
+        OH HI WELCOME! I WANT TO HEAR YOUR NEWS.
         <br />
         THIS WEB SPACE WILL BE COMPLETED BY YOUR THOUGHTS.
       </SubTitle>

@@ -27,7 +27,7 @@ function* login$(action: LoginAction) {
         uid,
       },
     });
-  } catch {
+  } catch (err) {
     // IF GET ERROR
     // DISPATCH LOGIN FAILURE
     yield put({

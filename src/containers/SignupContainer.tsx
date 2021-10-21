@@ -130,6 +130,12 @@ const SignupContainer = ({ props }: any) => {
     } else {
       setPasswordMsg("");
     }
+    if (password.length < 8) {
+      setPasswordMsg("비밀번호는 8자 이상 입력해주세요.");
+      return;
+    } else {
+      setPasswordMsg("");
+    }
     if (password !== checkPassword) {
       setCheckPasswordMsg("비밀번호가 다릅니다.");
       return;

@@ -130,7 +130,7 @@ const Header = () => {
         </Carousel.Item>
       </HeaderCarousel>
       <LabelContainer>
-        <span>LiHano's Blog</span>
+        <span>LiHano Board</span>
       </LabelContainer>
       {authState.uid === undefined ? (
         <AuthContainer>
