@@ -117,15 +117,21 @@ const LoginContainer = ({ history }: any) => {
     }
 
     dispatch(AuthActions.login({ email, password }));
-    setErrMsg(authState.loginFailureMsg);
     setPassword("");
   };
+
   /* INIT SETTING */
   useEffect(() => {
     if (authState.uid !== undefined) {
       history.push("/");
     }
   }, [authState]);
+
+  useEffect(() => {
+    if (authState.loginFailureMsg !== undefined) {
+      setErrMsg(authState.loginFailureMsg);
+    }
+  }, [authState.loginFailureMsg]);
 
   return (
     <LoginWrapper>

@@ -12,7 +12,7 @@ import rootReducer from "./reducers";
 import rootSaga from "./sagas";
 /* Persist를 위한 모듈들을 로드 */
 import { persistReducer } from "redux-persist";
-import storage from "redux-persist/lib/storage";
+import storage from "redux-persist/lib/storage/session";
 import { PersistGate } from "redux-persist/integration/react";
 import { persistStore } from "redux-persist";
 

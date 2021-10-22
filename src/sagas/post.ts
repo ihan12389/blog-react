@@ -22,6 +22,7 @@ export default function* postSaga() {
 /* WRITE REQUEST TRIGGER SAGA FUNCTION */
 function* write$(action: WriteAction) {
   try {
+    console.log(action.payload);
     // GET REQUEST DATA
     const writeData = action.payload;
     // TRY API

@@ -29,6 +29,7 @@ const authReducer = (state = initialState, action: AuthActionTypes) => {
     case AuthTypes.LOGIN_SUCCESS: // 로그인 성공
       return {
         ...state,
+        loginFailureMsg: "",
         loggingIn: false,
         uid: action.payload.uid,
         email: action.payload.email,
@@ -38,11 +39,6 @@ const authReducer = (state = initialState, action: AuthActionTypes) => {
       return {
         ...state,
         loggingIn: false,
-        loginFailureMsg: action.payload,
-      };
-    case AuthTypes.CHANGE_MESSAGE: // 메세지 변경
-      return {
-        ...state,
         loginFailureMsg: action.payload,
       };
     case AuthTypes.LOGOUT: // 로그아웃

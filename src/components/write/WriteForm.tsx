@@ -91,10 +91,13 @@ const WriteForm = (props: any) => {
     const indexOfStart = content.indexOf("src=");
     const indexOfLast = content.indexOf("></figure>");
     let imgSrc = "";
+    let largeImgSrc = "";
     if (indexOfStart === -1) {
       imgSrc = "";
+      largeImgSrc = "";
     } else {
       imgSrc = content.substring(indexOfStart + 5, indexOfLast - 1);
+      largeImgSrc = imageToDataUri(imgSrc, 500, 500);
       imgSrc = imageToDataUri(imgSrc, 120, 120);
     }
 
@@ -107,6 +110,7 @@ const WriteForm = (props: any) => {
         nickname: authState.nickname,
         date: date_string,
         previewImg: imgSrc,
+        mainImg: largeImgSrc,
         likes: 0,
       })
     );

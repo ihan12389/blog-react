@@ -19,6 +19,7 @@ export interface WriteData {
   nickname: string | undefined;
   date: string;
   previewImg: string;
+  mainImg: string;
   likes: number;
 }
 

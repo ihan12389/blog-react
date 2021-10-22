@@ -4,6 +4,7 @@ import postSaga from "./post";
 import postsSaga from "./posts";
 import likesSaga from "./likes";
 import commentSaga from "./comment";
+import topSaga from "./top";
 
 /* BIND SAGA FUNCTIONS */
 export default function* rootSaga() {
@@ -13,5 +14,6 @@ export default function* rootSaga() {
     fork(postsSaga),
     fork(likesSaga),
     fork(commentSaga),
+    fork(topSaga),
   ]);
 }

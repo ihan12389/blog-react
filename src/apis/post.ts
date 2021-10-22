@@ -8,6 +8,7 @@ interface WriteRequestDto {
   nickname: string | undefined;
   date: string;
   previewImg: string;
+  mainImg: string;
   likes: number;
 }
 /* API FUNCTION PROPS DATA INTERFACE */
@@ -18,11 +19,13 @@ interface WriteData {
   nickname: string | undefined;
   date: string;
   previewImg: string;
+  mainImg: string;
   likes: number;
 }
 /* WRITE API FUNCTION */
 export const write = async (writeData: WriteData) => {
   /* CREATE DTO */
+  console.log(writeData);
   const request: WriteRequestDto = {
     title: writeData.title,
     content: writeData.content,
@@ -30,6 +33,7 @@ export const write = async (writeData: WriteData) => {
     nickname: writeData.nickname,
     date: writeData.date,
     previewImg: writeData.previewImg,
+    mainImg: writeData.mainImg,
     likes: writeData.likes,
   };
   /* GET RESPONSE */

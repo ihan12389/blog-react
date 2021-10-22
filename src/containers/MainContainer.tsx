@@ -1,9 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { Container, Row } from "react-bootstrap";
+import { Container, Row, Spinner } from "react-bootstrap";
 import Header from "../components/main/Header";
 import HeaderSearch from "../components/search/HeaderSearch";
 import Main from "../components/main/Main";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../reducers";
+import { TopActions } from "../actions/top";
 
 /* STYLE */
 const TopContainer = styled(Container)`
@@ -34,10 +37,41 @@ const SecondRow = styled(Row)`
   padding: 0;
 `;
 
+const SpinnerContainer = styled(Container)`
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-self: center;
+`;
+
+const MainSpinner = styled(Spinner)`
+  margin: 150px;
+`;
+
 const MainContainer = () => {
+  /* USE STATE */
+  const [loading, setLoading] = useState(false);
+  /* REDUX */
+  const topState = useSelector((state: RootState) => state.top);
+  const dispatch = useDispatch();
+  /* INIT SETTING */
   useEffect(() => {
     console.log("MainContainer");
   }, []);
+
+  useEffect(() => {
+    if (topState.posts.length <= 1) {
+      dispatch(TopActions.read());
+    }
+  }, []);
+
+  useEffect(() => {
+    if (topState.loading !== undefined) {
+      setLoading(topState.loading);
+    }
+  }, [topState.loading]);
+
   return (
     <TopContainer>
       <FirstRow>
@@ -45,7 +79,15 @@ const MainContainer = () => {
       </FirstRow>
       <HeaderSearch />
       <SecondRow>
-        <Main />
+        {loading ? (
+          <SpinnerContainer>
+            <MainSpinner animation="border" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </MainSpinner>
+          </SpinnerContainer>
+        ) : (
+          <Main />
+        )}
       </SecondRow>
     </TopContainer>
   );

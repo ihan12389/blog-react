@@ -30,6 +30,7 @@ function* login$(action: LoginAction) {
   } catch (err) {
     // IF GET ERROR
     // DISPATCH LOGIN FAILURE
+    console.log(err);
     yield put({
       type: AuthTypes.LOGIN_FAILURE,
       payload: "Please Check your Email & Password.",
