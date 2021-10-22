@@ -351,7 +351,13 @@ const ShowContent = (props: any) => {
               <IoReturnDownBackSharp />
             </BackButton>
             <IconButton>
-              <FcLike onClick={addLike} />
+              {authState.uid === undefined || authState.uid === "" ? (
+                <></>
+              ) : (
+                <>
+                  <FcLike onClick={addLike} />
+                </>
+              )}
               {authState.nickname === postState.nickname ? (
                 <>
                   <MdDelete onClick={deletePost} />
