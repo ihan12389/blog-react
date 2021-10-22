@@ -9,6 +9,7 @@ interface addData {
 export const read = async (postId: String) => {
   /* GET RESPONSE */
   const response = await axios
+    // .get(`http://localhost:3000/api/likes/${postId}`, {
     .get(`https://lihano-board.herokuapp.com/api/likes/${postId}`, {
       params: {
         postId: postId,
@@ -30,6 +31,7 @@ export const add = async (addData: addData) => {
 
   /* GET RESPONSE */
   const response = await axios
+    // .post(`http://localhost:3000/api/likes/add`, request)
     .post(`https://lihano-board.herokuapp.com/api/likes/add`, request)
     .catch((err) => {
       console.log(err);

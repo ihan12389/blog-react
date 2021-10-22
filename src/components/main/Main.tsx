@@ -107,6 +107,20 @@ const MainSpinner = styled(Spinner)`
   margin: 150px;
 `;
 
+const TopLabel = styled.span`
+  margin-top: 100px;
+  margin-bottom: -20px;
+  font-family: "Noto Sans JP", sans-serif;
+  word-spacing: 3px;
+  letter-spacing: 2px;
+  text-align: center;
+  line-height: 2;
+  font-size: 24px;
+  text-decoration: underline;
+  font-weight: bold;
+  color: #3f3d41;
+`;
+
 const Main = () => {
   /* MAKE HISTORY */
   const history = useHistory();
@@ -131,6 +145,7 @@ const Main = () => {
               <br />
               Please write down Your Story here!
             </Explain>
+            <TopLabel>TOP POSTS</TopLabel>
             <GridContainer>
               <Row xs={1} sm={2}>
                 {topState.posts.map((post) => {
