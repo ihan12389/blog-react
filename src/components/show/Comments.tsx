@@ -201,23 +201,29 @@ const Comments = () => {
           );
         })}
       </ContentContainer>
-      <CommentInputGroup className="mb-3">
-        <FormControl
-          placeholder="please enter comment"
-          aria-label="Recipient's username"
-          aria-describedby="basic-addon2"
-          value={comment}
-          onChange={(event) => setComment(event.target.value)}
-          onKeyPress={uploadCommentEnter}
-        />
-        <Button
-          variant="outline-secondary"
-          id="button-addon2"
-          onClick={uploadComment}
-        >
-          Upload
-        </Button>
-      </CommentInputGroup>
+      {authState.uid === undefined || authState.uid === "" ? (
+        <></>
+      ) : (
+        <>
+          <CommentInputGroup className="mb-3">
+            <FormControl
+              placeholder="please enter comment"
+              aria-label="Recipient's username"
+              aria-describedby="basic-addon2"
+              value={comment}
+              onChange={(event) => setComment(event.target.value)}
+              onKeyPress={uploadCommentEnter}
+            />
+            <Button
+              variant="outline-secondary"
+              id="button-addon2"
+              onClick={uploadComment}
+            >
+              Upload
+            </Button>
+          </CommentInputGroup>
+        </>
+      )}
     </CommentContainer>
   );
 };
