@@ -10,9 +10,9 @@ import { AuthActions } from "../actions/auth";
 /* STYLE */
 const LoginWrapper = styled(Container)`
   padding: 0;
-  background-image: url("./images/13.jpg");
+  background-image: url("./images/19.jpg");
   background-size: cover;
-  opacity: 0.6;
+  opacity: 0.8;
   display: flex;
   flex-direction: column;
   justify-content: center;

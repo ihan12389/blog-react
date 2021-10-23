@@ -120,13 +120,16 @@ const Header = () => {
     <HeaderContainer>
       <HeaderCarousel>
         <Carousel.Item>
-          <Image fluid src="./images/2.jpg" />
-        </Carousel.Item>
-        <Carousel.Item>
-          <Image fluid src="./images/8.jpg" />
-        </Carousel.Item>
-        <Carousel.Item>
           <Image fluid src="./images/9.jpg" />
+        </Carousel.Item>
+        <Carousel.Item>
+          <Image fluid src="./images/6.jpg" />
+        </Carousel.Item>
+        <Carousel.Item>
+          <Image fluid src="./images/14.jpg" />
+        </Carousel.Item>
+        <Carousel.Item>
+          <Image fluid src="./images/16.jpg" />
         </Carousel.Item>
       </HeaderCarousel>
       <LabelContainer>
