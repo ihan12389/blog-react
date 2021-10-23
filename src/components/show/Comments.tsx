@@ -201,7 +201,7 @@ const Comments = () => {
           );
         })}
       </ContentContainer>
-      {authState.uid === undefined || authState.uid === "" ? (
+      {authState.uid === undefined ? (
         <></>
       ) : (
         <>
