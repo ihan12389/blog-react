@@ -20,41 +20,53 @@ const PaginationComponent = (props: any) => {
   /* INIT SETTING */
   useEffect(() => {
     console.log(props.len);
-    if (props.page <= 3) {
-      setPageNumArr([1, 2, 3, 4, 5]);
-    } else if (parseInt(props.page) === 4 && Math.ceil(props.len / 6) === 4) {
-      setPageNumArr([
-        parseInt(props.page) - 2,
-        parseInt(props.page) - 1,
-        parseInt(props.page),
-        parseInt(props.page) + 1,
-        parseInt(props.page) + 2,
-      ]);
-    } else if (parseInt(props.page) === Math.ceil(props.len / 6)) {
-      setPageNumArr([
-        parseInt(props.page) - 4,
-        parseInt(props.page) - 3,
-        parseInt(props.page) - 2,
-        parseInt(props.page) - 1,
-        parseInt(props.page),
-      ]);
-    } else if (parseInt(props.page) === Math.ceil(props.len / 6) - 1) {
-      setPageNumArr([
-        parseInt(props.page) - 3,
-        parseInt(props.page) - 2,
-        parseInt(props.page) - 1,
-        parseInt(props.page),
-        parseInt(props.page) + 1,
-      ]);
+    if (Math.ceil(props.len / 6) < 5) {
+      if (Math.ceil(props.len / 6) === 1) {
+        setPageNumArr([1]);
+      } else if (Math.ceil(props.len / 6) === 2) {
+        setPageNumArr([1, 2]);
+      } else if (Math.ceil(props.len / 6) === 3) {
+        setPageNumArr([1, 2, 3]);
+      } else if (Math.ceil(props.len / 6) === 4) {
+        setPageNumArr([1, 2, 3, 4]);
+      }
     } else {
-      console.log("Math", Math.ceil(props.len / 6));
-      setPageNumArr([
-        parseInt(props.page) - 2,
-        parseInt(props.page) - 1,
-        parseInt(props.page),
-        parseInt(props.page) + 1,
-        parseInt(props.page) + 2,
-      ]);
+      if (props.page <= 3) {
+        setPageNumArr([1, 2, 3, 4, 5]);
+      } else if (parseInt(props.page) === 4 && Math.ceil(props.len / 6) === 4) {
+        setPageNumArr([
+          parseInt(props.page) - 2,
+          parseInt(props.page) - 1,
+          parseInt(props.page),
+          parseInt(props.page) + 1,
+          parseInt(props.page) + 2,
+        ]);
+      } else if (parseInt(props.page) === Math.ceil(props.len / 6)) {
+        setPageNumArr([
+          parseInt(props.page) - 4,
+          parseInt(props.page) - 3,
+          parseInt(props.page) - 2,
+          parseInt(props.page) - 1,
+          parseInt(props.page),
+        ]);
+      } else if (parseInt(props.page) === Math.ceil(props.len / 6) - 1) {
+        setPageNumArr([
+          parseInt(props.page) - 3,
+          parseInt(props.page) - 2,
+          parseInt(props.page) - 1,
+          parseInt(props.page),
+          parseInt(props.page) + 1,
+        ]);
+      } else {
+        console.log("Math", Math.ceil(props.len / 6));
+        setPageNumArr([
+          parseInt(props.page) - 2,
+          parseInt(props.page) - 1,
+          parseInt(props.page),
+          parseInt(props.page) + 1,
+          parseInt(props.page) + 2,
+        ]);
+      }
     }
   }, [props.page]);
 
